@@ -27,7 +27,6 @@ const routes = [
   },
   {
     path: '/recommend',
-    name: 'recommend',
     component: Layout,
     children: [
       {
@@ -39,7 +38,6 @@ const routes = [
   },
   {
     path: '/news',
-    name: 'news',
     component: Layout,
     children: [
       {
@@ -52,7 +50,6 @@ const routes = [
   },
   {
     path: '/financing',
-    name: 'financing',
     component: Layout,
     children: [
       {
@@ -65,7 +62,6 @@ const routes = [
   },
   {
     path: '/fund',
-    name: 'fund',
     component: Layout,
     children: [
       {
@@ -78,7 +74,6 @@ const routes = [
   },
   {
     path: '/preciousMetal',
-    name: 'preciousMetal',
     component: Layout,
     children: [
       {
@@ -94,13 +89,23 @@ const routes = [
   {
     path: '/articleDetails',
     name: 'articleDetails',
-    component: () => import('@/views/articleDetails/index.vue')
+    component: () =>
+      import(
+        /* webpackChunkName: "articleDetails" */ '../views/articleDetails/index.vue'
+      )
+  },
+  {
+    path: '/shareArticleDetails',
+    name: 'shareArticleDetails',
+    component: () =>
+      import(
+        /* webpackChunkName: "shareArticleDetails" */ '../views/shareArticleDetails/index.vue'
+      )
   },
   {
     path: '/search',
     name: 'search',
-    component: Layout,
-    component: () => import(/* webpackChunkName: "news" */ '../views/search/')
+    component: () => import(/* webpackChunkName: "search" */ '../views/search/')
   }
 ]
 

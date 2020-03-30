@@ -9,7 +9,7 @@
     >
       <div class="cm-history-val">
         <img src="../assets/img/v-search@2x.png" class="cm-history-img" />
-        <span>{{ item.val }}</span>
+        <span>{{ item.key }}</span>
       </div>
     </div>
   </div>
@@ -43,14 +43,14 @@ export default {
 .cm-history-val {
   background: #ffffff;
   height: 0.9rem;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 0.02rem solid #dbdbdb;
 }
 .cm-history-val span {
   float: left;
   margin-left: 0.15rem;
   margin-top: 0.3rem;
   font-family: 'PingFang-SC-Medium';
-  font-size: 15px;
+  font-size: 0.3rem;
   color: #666666;
   letter-spacing: 0;
   line-height: 0.29rem;

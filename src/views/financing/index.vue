@@ -8,12 +8,22 @@
   >
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh(-1)">
       <div class="cm-news-list">
-        <van-skeleton title avatar :row="3" :loading="loading"> </van-skeleton>
+        <van-skeleton
+          v-for="i in 5"
+          :key="i"
+          title
+          avatar
+          :row="3"
+          :loading="loading"
+        >
+        </van-skeleton>
+
         <List-Item
           v-for="article in articles"
           :key="article.id"
           :article="article"
-        />
+        >
+        </List-Item>
       </div>
     </van-pull-refresh>
   </van-list>

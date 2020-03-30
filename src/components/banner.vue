@@ -7,18 +7,22 @@
       :show-indicators="true"
       class="van-swipe  recommend-swipe"
     >
-      <van-swipe-item v-for="(image, index) in Swipers" :key="index">
-        <img :src="image.url" class="imag" />
-        <div class="introduce">
-          <div class="swipe-img-tit">
-            投资黄金需要了解的几种目的
+      <van-swipe-item v-for="(item, index) in Swipers" :key="index">
+        <router-link
+          :to="{ path: '/articleDetails', query: { articleId: item.docId } }"
+        >
+          <img :src="item.coverUrl" class="imag" />
+          <div class="introduce">
+            <div class="swipe-img-tit">
+              {{ item.content }}
+            </div>
+            <div class="swipe-img-info">
+              <span class="swipe-img-name">{{ item.source }}</span>
+              <span class="swipe-img-read">{{ item.readNum }}阅读</span>
+              <span class="swipe-img-date">{{ item.publishTime }}</span>
+            </div>
           </div>
-          <div class="swipe-img-info">
-            <span class="swipe-img-name">{{ image.name }}</span>
-            <span class="swipe-img-read">{{ image.read }}</span>
-            <span class="swipe-img-date">{{ image.date }}</span>
-          </div>
-        </div>
+        </router-link>
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -61,7 +65,7 @@ export default {
   padding-left: 0.2rem;
   line-height: 0.32rem;
   padding-bottom: 0.16rem;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.02rem 0.02rem rgba(0, 0, 0, 0.5);
 }
 .swipe-img-info span {
   line-height: 0.26rem;
@@ -107,12 +111,13 @@ export default {
   width: 110%;
   height: 100%;
   margin-left: -0.3rem;
-  margin-top: -0.1rem;
+  margin-top: -0.2rem;
 }
 .imag {
   border-radius: 0.04rem;
   width: 100%;
   height: 2.96rem;
   pointer-events: none;
+  display: block;
 }
 </style>

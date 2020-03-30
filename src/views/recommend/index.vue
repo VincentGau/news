@@ -8,10 +8,19 @@
   >
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh(-1)">
       <div class="cm-news-list">
+        <van-skeleton
+          v-for="i in 5"
+          :key="i"
+          title
+          avatar
+          :row="3"
+          :loading="loading"
+        >
+        </van-skeleton>
         <div class="swiper">
           <Banners :Swipers="Swipers" />
         </div>
-        <van-skeleton title avatar :row="3" :loading="loading"></van-skeleton>
+
         <List-Item
           v-for="article in articles"
           :key="article.id"
@@ -49,7 +58,6 @@ export default {
       .get('/getList')
       .then(response => {
         this.articles = response.data.data
-        // console.log(this.articles)
         this.loading = false
       })
       .catch(error => console.log(error))
@@ -62,10 +70,9 @@ export default {
       // 上拉刷新
     },
     inita() {
-      console.log('sssss')
       axios.get('/getRecommendNewsInfo4Banner').then(data => {
         this.Swipers = data.data.data
-        console.log(this.Swipers)
+        // console.log(this.Swipers)
       })
     },
     onRefresh() {

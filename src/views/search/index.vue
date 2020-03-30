@@ -2,7 +2,7 @@
   <div>
     <div class="cm-van-search">
       <van-search
-        v-model="value"
+        v-model="searchvalue"
         show-action
         placeholder="输入关键词查询"
         @search="onSearch"
@@ -15,7 +15,7 @@
     <div class="cm-hot" v-show="show">
       <div class="cm-hot-name">热门搜索</div>
       <div class="cm-lables">
-        <SearchHot :list="list" @hot="hotval($event)" />
+        <SearchHot :list="hotwordlist" @hot="hotval($event)" />
       </div>
     </div>
 
@@ -23,7 +23,7 @@
     <div class="cm-history" v-show="show">
       <div class="cm-history-name">历史搜索</div>
       <SearchHistory
-        :list="list"
+        :list="historydata"
         :showclear="showclear"
         @history="history($event)"
       />
@@ -34,22 +34,34 @@
     </div>
 
     <!-- 结果 -->
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh(-1)">
-      <div class="cm-result" v-show="!show">
+    <div v-show="!show">
+      <div class="cm-result">
         <div class="cm-result-header">
           <span>资讯</span>
         </div>
         <div class="cm-news-list">
-          <ListItem
-            v-for="article in result"
-            :key="article.id"
-            :article="article"
-            class="cm-bottom-noborder"
-          />
+          <van-list
+            v-model="loading"
+            :finished="finished"
+            loading-text="正在刷新"
+            finished-text="没有更多了"
+            @load="onLoad"
+            :offset="10"
+          >
+            <ListItem
+              v-for="article in articles"
+              :key="article.id"
+              :article="article"
+              class="cm-bottom-noborder"
+            />
+          </van-list>
         </div>
-        <CustomService val="以上都不是，向客服提问吧" butval="提问" />
       </div>
-    </van-pull-refresh>
+    </div>
+    <!-- 客服 -->
+    <div class="cm-CustomService" v-show="!show">
+      <CustomService />
+    </div>
   </div>
 </template>
 
@@ -58,9 +70,7 @@ import SearchHistory from '@/components/searchHistory.vue'
 import SearchHot from '@/components/searchHot.vue'
 import CustomService from '@/components/customService.vue'
 import ListItem from '@/components/ListItem.vue'
-import '../../assets/css/master.css'
-import '../../mock/mock.js'
-import Axios from 'axios'
+import axios from 'axios'
 export default {
   components: {
     ListItem,
@@ -72,11 +82,14 @@ export default {
     return {
       finished: false,
       isLoading: false,
-      value: '',
+      searchvalue: '',
       show: true,
+      loading: false,
       showclear: true,
-      aaa: 'tag',
-      list: [],
+      // 数据
+      historydata: [],
+      articles: [],
+      hotwordlist: [],
       result: []
     }
   },
@@ -84,49 +97,57 @@ export default {
     this.inita()
   },
   methods: {
-    onRefresh() {
-      // 下拉刷新
-      this.finished = false
-      this.isLoading = false
-      this.$toast({
-        message: '刷新成功',
-        position: 'center'
-      })
+    onLoad() {
+      // 上拉刷新
+      setTimeout(() => {
+        this.finished = true
+      }, 1000)
     },
+    // 清空历史
     showclears() {
       this.showclear = false
     },
+    //输入框失去焦点时触发
     onblur() {
-      if (this.value == '') {
+      if (this.searchvalue == '') {
         this.show = true
       } else {
         this.show = false
       }
     },
+    // 点击清除按钮后触发
     onclear() {
       this.show = true
     },
+    // 初始化
     inita() {
-      console.log('sssss')
-      Axios.get('/getSearchHotKeyWordList').then(data => {
-        this.list = data.data.data
-        this.list.forEach(element => {
-          var i = 0
-          if (i < 3) {
-            this.result.push(element)
-            i++
-          }
+      axios
+        .get('/getSearchHotKeyWordList')
+        .then(response => {
+          this.hotwordlist = response.data.data
         })
-        console.log(this.list)
-      })
+        .catch(error => console.log(error))
+      axios
+        .get('/gethistory')
+        .then(response => {
+          this.historydata = response.data.data
+        })
+        .catch(error => console.log(error))
+      axios
+        .get('/getList')
+        .then(response => {
+          this.articles = response.data.data
+        })
+        .catch(error => console.log(error))
     },
+    // 点击热词搜索
     hotval(item) {
-      this.value = item.val
+      this.searchvalue = item.val
       this.show = false
     },
+    // 点击历史搜索
     history(item) {
-      console.log(11121212, item)
-      this.value = item.val
+      this.searchvalue = item.val
       this.show = false
     },
     onSearch(val) {
@@ -136,6 +157,7 @@ export default {
         this.show = false
       }
     },
+    // 点击取消按钮后触发
     onCancel() {
       this.$router.push('/recommend')
     }
@@ -147,21 +169,27 @@ export default {
 .cm-result {
   overflow: hidden;
   background: #ffffff;
+  height: 10rem;
+  overflow-y: scroll;
 }
 .cm-result-header {
+  position: sticky;
+  top: 0;
   margin-left: 0.3rem;
   background: #ffffff;
   height: 0.8rem;
-  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 0.05rem;
+  border-bottom: 0.02rem solid #f1f1f1;
 }
 .cm-result-header span {
   position: relative;
   left: -3.1rem;
+  top: -0.03rem;
   font-family: 'PingFangSC-Regular';
-  font-size: 17px;
+  font-size: 0.34rem;
   color: #222222;
   letter-spacing: 0;
-  line-height: 0.31rem;
+  line-height: 0.34rem;
 }
 /* 订阅 */
 .cm-subscribe-1 {
@@ -183,7 +211,7 @@ export default {
   left: -3.1rem;
   top: 0.2rem;
   font-family: 'PingFangSC-Regular';
-  font-size: 17px;
+  font-size: 0.34rem;
   color: #222222;
   letter-spacing: 0;
   line-height: 0.31rem;
@@ -208,7 +236,7 @@ export default {
   left: -2.8rem;
   top: 0.2rem;
   font-family: 'PingFang-SC-Medium';
-  font-size: 17px;
+  font-size: 0.34rem;
   color: #222222;
   letter-spacing: 0;
   text-align: center;
@@ -227,7 +255,7 @@ export default {
   height: 0.4rem;
   background: #f1f1f1;
   font-family: 'PingFang-SC-Medium';
-  font-size: 14px;
+  font-size: 0.28rem;
   color: #333330;
   letter-spacing: 0;
   line-height: 0.29rem;
@@ -252,7 +280,7 @@ export default {
   position: relative;
   left: -2.7rem;
   font-family: 'PingFangSC-Regular';
-  font-size: 17px;
+  font-size: 0.34rem;
   color: #222222;
   letter-spacing: 0;
   /* line-height: 0.61rem; */
@@ -265,7 +293,7 @@ export default {
 }
 .cm-clears-val {
   font-family: 'PingFang-SC-Medium';
-  font-size: 13px;
+  font-size: 0.26rem;
   color: #999999;
   letter-spacing: 0;
   line-height: 0.25rem;

@@ -16,6 +16,9 @@
     </van-nav-bar>
     <!-- 文章 -->
     <div class="cm-article-page">
+      <van-skeleton title avatar :row="3" :loading="loading"></van-skeleton>
+      <van-skeleton title avatar :row="1" :loading="loading"></van-skeleton>
+      <van-skeleton title avatar :row="10" :loading="loading"></van-skeleton>
       <div class="cm-article-tit">
         {{ NewsDetail.title }}
       </div>
@@ -83,12 +86,13 @@ export default {
       articleId: '',
       RecommemdProductList: [],
       NewsDetail: {},
-      relevantInformation: {}
+      relevantInformation: {},
+      loading: true
     }
   },
   created() {
     this.articleId = this.$route.query.articleId
-    console.log('文章id', this.articleId)
+    // console.log('文章id', this.articleId)
   },
   mounted() {
     // 获取推荐产品数据
@@ -103,6 +107,7 @@ export default {
       .get('/getNewsDetail')
       .then(response => {
         this.NewsDetail = response.data.data
+        this.loading = false
       })
       .catch(error => console.log(error))
     //获取相关资讯的数据
@@ -125,14 +130,14 @@ export default {
       // 取消点赞
       if (!value) {
         this.NewsDetail.likeNum -= 1
-        console.log('取消点赞了')
+        // console.log('取消点赞了')
       }
     },
     givePraise(value) {
       // 点赞
       if (value) {
         this.NewsDetail.likeNum += 1
-        console.log('点赞了')
+        // console.log('点赞了')
       }
     }
   }
@@ -160,4 +165,4 @@ export default {
 .header .van-hairline--bottom::after {
   border-bottom-color: white;
 }
-</style>
+</style> 

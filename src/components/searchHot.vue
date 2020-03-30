@@ -7,7 +7,7 @@
       v-for="(item, index) in list"
       :key="index"
     >
-      {{ item.val }}
+      {{ item.key }}
       <img src="../assets/img/hot.png" class="cm-hot-img" />
     </van-tag>
   </div>
@@ -17,7 +17,7 @@
 export default {
   props: {
     list: {
-      type: Boolean,
+      type: Array,
       required: true
     }
   }
@@ -30,7 +30,7 @@ export default {
   height: 0.6rem;
   background: #f1f1f1;
   font-family: 'PingFang-SC-Medium';
-  font-size: 14px;
+  font-size: 0.28rem;
   color: #333330;
   letter-spacing: 0;
   line-height: 0.28rem;
