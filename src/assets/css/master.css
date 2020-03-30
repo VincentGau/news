@@ -1,13 +1,18 @@
 /* 新闻列表 start多页面可复用 */
+
+
 .cm-news-list {
-  padding-left: 0.32rem;
-  background-color: #fff;
-  margin-top: .02rem;
+  background-color: #ffffff;
 }
 
 /* tab 上边框 */
 .van-hairline--top-bottom::after {
-  border-color: white;
+  border: none;
+}
+
+
+.van-tabs__wrap {
+  border-bottom: 1px solid #E5E5E5;
 }
 
 .cm-news-item {
@@ -15,6 +20,7 @@
   padding-bottom: 0.34rem;
   padding-right: 0.32rem;
   font-size: 0rem;
+  margin-left: .32rem;
 }
 
 .cm-news-item .cm-news-abstract {
@@ -184,10 +190,7 @@
   padding: 0.2rem 0;
 }
 
-.cm-article-content .cm-illustration-one {
-  width: 6.86rem;
-  height: 3.44rem;
-}
+
 
 .cm-article-content img {
   width: 6.86rem;
@@ -202,7 +205,7 @@
   letter-spacing: 0;
   text-align: justify;
   line-height: 0.5rem;
-  text-indent: .64rem;
+  /* text-indent: .64rem; */
 }
 
 .cm-article-readdate {
@@ -223,34 +226,7 @@
   color: #666666;
 }
 
-.cm-article-praise {
-  margin: 0.32rem auto;
-  height: 0.98rem;
-  width: 0.96rem;
-  position: relative;
-  background: #fff;
 
-}
-
-.cm-article-praise img {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  box-shadow: #f1f1f1 0px 0px 10px;
-}
-
-.cm-article-praise span {
-  position: absolute;
-  width: 0.96rem;
-  text-align: center;
-  left: 0;
-  bottom: 0.164rem;
-  font-family: "SFUIDisplay-Regular";
-  font-size: 0.2rem;
-  color: #999999;
-  letter-spacing: 0;
-  line-height: 0.2rem;
-}
 
 .cm-statement-content p {
   font-family: "PingFang-SC-Medium";
@@ -266,9 +242,7 @@
   background-color: #ffffff;
 }
 
-.cm-info-box {
-  padding-left: .32rem;
-}
+
 
 .cm-info-box>p,
 .cm-recommend-info>p {
@@ -279,6 +253,7 @@
   line-height: .34rem;
   text-align: left;
   padding-top: .6rem;
+  padding-left: .32rem;
 }
 
 .cm-bottom-noborder {
@@ -287,8 +262,7 @@
 
 .cm-recommend-info {
   text-align: left;
-  padding-left: .4rem;
-  padding-bottom: .6rem;
+  /* padding-bottom: .6rem; */
 }
 
 
@@ -328,6 +302,7 @@
 
 .recommend-swipe .van-swipe__indicators {
   width: 2rem;
+  bottom: .2rem;
 }
 
 .recommend-swipe .van-swipe__indicators .van-swipe__indicator {

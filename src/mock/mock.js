@@ -6,9 +6,16 @@ Mock.setup({
 
 //格式： Mock.mock( url, post/get , 返回的数据)；
 Mock.mock('/getList', 'get', require('./json/mock1'))
-Mock.mock('/getRecommemdProductList', 'get', require('./json/mock2.json'))
-Mock.mock('/getDetails', 'get', returnBack)
+Mock.mock(
+  '/getRecommemdProductList',
+  'get',
+  require('./json/RecommendProductList.json')
+)
+Mock.mock('/getNewsDetail', 'get', require('./json/articledetails.json'))
 
+Mock.mock('/getDetails', 'get', returnBack)
+Mock.mock('/getSearchHotKeyWordList', 'get', require('./json/search.json'))
+Mock.mock('/getRecommendNewsInfo4Banner', 'get', require('./json/banner.json'))
 function returnBack(prarms) {
   //prarms为前端传来到请求内容：  {url: "/testInfo2", type: "GET", body: "{"xm":"11"}"}
   console.log(prarms)

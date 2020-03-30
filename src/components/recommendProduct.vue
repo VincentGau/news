@@ -27,6 +27,7 @@ export default {
 <style scoped>
 .cm-recommend-item {
   padding: 0.2rem 0;
+  padding-left: 0.32rem;
 }
 
 .cm-recommend-item div span {

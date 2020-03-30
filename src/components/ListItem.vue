@@ -11,7 +11,7 @@
           <span class="cm-news-name">{{ article.source }}</span>
           <span class="cm-news-read">{{ article.readNum }}阅读</span>
           <span class="cm-news-date">{{
-            article.publishTime.substring(0, 10)
+            article.publishTime ? article.publishTime.substring(0, 10) : ''
           }}</span>
         </div>
       </div>

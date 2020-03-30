@@ -1,6 +1,6 @@
 <template>
   <van-list
-    v-model="loading"
+    v-model="load"
     :finished="finished"
     @load="onLoad"
     :offset="10"
@@ -9,27 +9,7 @@
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh(-1)">
       <div class="cm-news-list">
         <div class="swiper">
-          <van-swipe
-            :autoplay="2000"
-            :loop="true"
-            indicator-color="#000000"
-            :show-indicators="true"
-            class="van-swipe  recommend-swipe"
-          >
-            <van-swipe-item v-for="(image, index) in SwiperImg" :key="index">
-              <img :src="image.url" class="imag" />
-              <div class="introduce">
-                <div class="swipe-img-tit">
-                  投资黄金需要了解的几种目的
-                </div>
-                <div class="swipe-img-info">
-                  <span class="swipe-img-name">新财富杂志</span>
-                  <span class="swipe-img-read">10万阅读</span>
-                  <span class="swipe-img-date">2020-02-15</span>
-                </div>
-              </div>
-            </van-swipe-item>
-          </van-swipe>
+          <Banners :Swipers="Swipers" />
         </div>
         <van-skeleton title avatar :row="3" :loading="loading"></van-skeleton>
         <List-Item
@@ -45,26 +25,22 @@
 import AppTab from '@/components/AppTab/'
 import '../../assets/css/master.css'
 import ListItem from '@/components/ListItem.vue'
+import Banners from '@/components/banner.vue'
 import axios from 'axios'
 export default {
   components: {
     AppTab,
-    ListItem
+    ListItem,
+    Banners
   },
   data() {
     return {
-      loading: false,
+      load: false,
       finished: false,
       isLoading: false,
       articles: [],
       loading: true,
-      SwiperImg: [
-        { url: require('../../assets/img/news1-img.png') },
-        { url: require('../../assets/img/news2-img.png') },
-        { url: require('../../assets/img/news3-img.png') },
-        { url: require('../../assets/img/news7-img.png') },
-        { url: require('../../assets/img/news6-img.png') }
-      ]
+      Swipers: []
     }
   },
   mounted() {
@@ -78,10 +54,19 @@ export default {
       })
       .catch(error => console.log(error))
   },
-  created() {},
+  created() {
+    this.inita()
+  },
   methods: {
     onLoad(code) {
       // 上拉刷新
+    },
+    inita() {
+      console.log('sssss')
+      axios.get('/getRecommendNewsInfo4Banner').then(data => {
+        this.Swipers = data.data.data
+        console.log(this.Swipers)
+      })
     },
     onRefresh() {
       // 下拉刷新
@@ -158,13 +143,12 @@ export default {
 }
 .swiper {
   padding-top: 0.2rem;
-  width: 100%;
+  padding-left: 0.32rem;
+  padding-right: 0.32rem;
   height: 3.54rem;
-  margin-right: 0.2rem;
 }
 .van-swipe {
-  margin-right: 0.2rem;
-  width: 95%;
+  width: 100%;
   height: 100%;
 }
 .imag {
