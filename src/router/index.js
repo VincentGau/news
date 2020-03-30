@@ -22,6 +22,10 @@ Vue.use(VueRouter)
 // 实际开发中，路由要动态添加。
 const routes = [
   {
+    path: '/',
+    redirect: 'recommend'
+  },
+  {
     path: '/recommend',
     name: 'recommend',
     component: Layout,
@@ -65,7 +69,7 @@ const routes = [
     component: Layout,
     children: [
       {
-        path: '/', 
+        path: '/',
         component: () =>
           import(/* webpackChunkName: "fund" */ '../views/fund/'),
         meta: { title: '基金' }
@@ -86,6 +90,17 @@ const routes = [
         meta: { title: '贵金属' }
       }
     ]
+  },
+  {
+    path: '/articleDetails',
+    name: 'articleDetails',
+    component: () => import('@/views/articleDetails/index.vue')
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: Layout,
+    component: () => import(/* webpackChunkName: "news" */ '../views/search/')
   }
 ]
 

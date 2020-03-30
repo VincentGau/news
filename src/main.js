@@ -9,9 +9,28 @@ import './mock/mock.js'
 import './plugins/vant-ui'
 import './plugins/rem.js'
 import './assets/css/reset.css'
-import { Swipe, SwipeItem } from 'vant'
+import 'vant/lib/index.css'
+import {
+  Swipe,
+  SwipeItem,
+  List,
+  PullRefresh,
+  Toast,
+  Loading,
+  Search,
+  Tag,
+  Button
+} from 'vant'
+Vue.use(Button)
+Vue.use(Tag)
+Vue.use(Search)
+
 Vue.use(Swipe)
 Vue.use(SwipeItem)
+Vue.use(List)
+Vue.use(PullRefresh)
+Vue.use(Loading)
+Vue.use(Toast)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 

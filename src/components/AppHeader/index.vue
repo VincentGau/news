@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <van-nav-bar :title="title" left-text="" left-arrow>
-      <van-icon name="search" slot="right" />
+      <van-icon name="search" slot="right" @click="tosearch" />
     </van-nav-bar>
   </div>
 </template>
@@ -16,6 +16,11 @@ export default {
   watch: {
     $route(to, from) {
       this.title = this.$route.meta.title
+    }
+  },
+  methods: {
+    tosearch() {
+      this.$router.push('/search')
     }
   }
 }

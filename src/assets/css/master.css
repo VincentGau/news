@@ -29,7 +29,7 @@
   height: 0.96rem;
   width: 4.3rem;
   letter-spacing: 0;
-  font-family: PingFangSC-Regular;
+  font-family: "PingFangSC-Regular";
   text-align: justify;
   line-height: 0.48rem;
   display: -webkit-box;
@@ -48,7 +48,7 @@
 .cm-news-item .cm-news-info span {
   line-height: 0.26rem;
   letter-spacing: 0;
-  font-family: PingFangSC-Regular;
+  font-family: "PingFangSC-Regular";
   overflow: hidden;
 }
 
@@ -106,7 +106,7 @@
 .cm-news-itemBigImg .cm-news-tit {
   /* margin-top: .28rem; */
   letter-spacing: 0;
-  font-family: PingFangSC-Regular;
+  font-family: "PingFangSC-Regular";
   text-align: justify;
   line-height: 0.48rem;
   display: -webkit-box;
@@ -136,7 +136,7 @@
 .cm-news-itemBigImg .cm-news-info span {
   line-height: 0.26rem;
   letter-spacing: 0;
-  font-family: PingFangSC-Regular;
+  font-family: "PingFangSC-Regular";
   overflow: hidden;
 }
 
@@ -178,7 +178,7 @@
 }
 
 .cm-article-page .cm-article-tit {
-  font-family: PingFangSC-Regular;
+  font-family: "PingFangSC-Regular";
   font-size: 0.4rem;
   color: #000000;
   letter-spacing: 0;
@@ -190,6 +190,7 @@
   height: 1.28rem;
   display: flex;
   align-items: center;
+  text-align: left;
 }
 
 .cm-article-authorInfo .cm-author-img {
@@ -217,7 +218,7 @@
 }
 
 .cm-article-authorInfo .cm-author-nameInfo p:nth-child(1) {
-  font-family: PingFang-SC-Medium;
+  font-family: "PingFang-SC-Medium";
   font-size: 0.28rem;
   color: #333333;
   letter-spacing: 0;
@@ -225,7 +226,7 @@
 }
 
 .cm-article-authorInfo .cm-author-nameInfo p:nth-child(2) {
-  font-family: SFUIDisplay-Regular;
+  font-family: "SFUIDisplay-Regular";
   font-size: 0.26rem;
   color: #999999;
   letter-spacing: 0;
@@ -238,7 +239,7 @@
   width: 1.2rem;
   border: 1px solid #e5e5e5;
   border-radius: 0.04rem;
-  font-family: PingFang-SC-Medium;
+  font-family: "PingFang-SC-Medium";
   font-size: 0.26rem;
   color: #c4c4c4;
   letter-spacing: 0;
@@ -252,7 +253,7 @@
   width: 1.2rem;
   border: 1px solid #ffa900;
   border-radius: 0.04rem;
-  font-family: PingFang-SC-Medium;
+  font-family: "PingFang-SC-Medium";
   font-size: 0.26rem;
   color: #ffa900;
   letter-spacing: 0;
@@ -277,29 +278,30 @@
 
 .cm-article-content p {
   padding: 0.2rem 0;
-  font-family: PingFangSC-Regular;
+  font-family: "PingFangSC-Regular";
   font-size: 0.3rem;
   color: #333333;
   letter-spacing: 0;
   text-align: justify;
   line-height: 0.5rem;
-  /* text-indent: .64rem; */
+  text-indent: .64rem;
 }
 
 .cm-article-readdate {
   font-size: 0.26rem;
   letter-spacing: 0;
   line-height: 0.26rem;
+  text-align: left;
 }
 
 .cm-article-readdate span:nth-child(1) {
-  font-family: PingFangSC-Regular;
+  font-family: "PingFangSC-Regular";
   color: #2a2a2a;
 }
 
 .cm-article-readdate span:nth-child(2) {
   margin-left: 0.44rem;
-  font-family: SFUIDisplay-Regular;
+  font-family: "SFUIDisplay-Regular";
   color: #666666;
 }
 
@@ -309,6 +311,7 @@
   width: 0.96rem;
   position: relative;
   background: #fff;
+
 }
 
 .cm-article-praise img {
@@ -324,7 +327,7 @@
   text-align: center;
   left: 0;
   bottom: 0.164rem;
-  font-family: SFUIDisplay-Regular;
+  font-family: "SFUIDisplay-Regular";
   font-size: 0.2rem;
   color: #999999;
   letter-spacing: 0;
@@ -332,11 +335,82 @@
 }
 
 .cm-statement-content p {
-  font-family: PingFang-SC-Medium;
+  font-family: "PingFang-SC-Medium";
+  text-align: left;
   font-size: 0.24rem;
   color: #999999;
   letter-spacing: 0;
   line-height: 0.36rem;
+}
+
+.cm-bottom-box {
+  margin-top: .16rem;
+  background-color: #ffffff;
+}
+
+.cm-info-box {
+  padding-left: .32rem;
+}
+
+.cm-info-box>p,
+.cm-recommend-info>p {
+  font-family: "PingFangSC-Regular";
+  font-size: .34rem;
+  color: #333333;
+  letter-spacing: 0;
+  line-height: .34rem;
+  text-align: left;
+  padding-top: .6rem;
+}
+
+.cm-bottom-noborder {
+  border: none
+}
+
+.cm-recommend-info {
+  text-align: left;
+  padding-left: .4rem;
+  padding-bottom: .6rem;
+}
+
+.cm-recommend-item ul {
+  padding-top: .4rem;
+}
+
+.cm-recommend-item ul li span:nth-child(1) {
+  width: 1.6rem;
+  display: inline-block;
+}
+
+.cm-recommend-item ul li:nth-child(1) span:nth-child(1) {
+  font-family: "SFUIDisplay-Light";
+  font-size: .44rem;
+  color: #FE6960;
+  letter-spacing: 0;
+  line-height: .36rem;
+}
+
+.cm-recommend-item ul li:nth-child(1) span:nth-child(2) {
+  font-family: "PingFangSC-Regular";
+  font-size: .32rem;
+  color: #333333;
+  letter-spacing: 0;
+  line-height: .3rem;
+  margin-left: 1rem;
+}
+
+.cm-recommend-item ul li:nth-child(2) {
+  font-family: "PingFangSC-Regular";
+  font-size: .26rem;
+  color: #999999;
+  letter-spacing: 0;
+  line-height: .26rem;
+  margin-top: .16rem;
+
+}
+
+.cm-recommend-item ul li:nth-child(2) span:nth-child(2) {
+  margin-left: 1rem;
 }
 
 /* 文章详情页 end */
@@ -353,3 +427,58 @@
 }
 
 /* 关注列表 end */
+/* 触底刷新 样式 start */
+.van-loading {
+  height: .88rem;
+}
+
+/* 触底刷新样式 end */
+/* 隐藏滚动条 start */
+::-webkit-scrollbar {
+  display: none;
+
+}
+
+/*隐藏侧边滚动条 end*/
+
+/* 轮播样式 start */
+.recommend-swipe {
+  height: 3rem;
+}
+
+.recommend-swipe .van-swipe__indicators {
+  width: 2rem;
+}
+
+.recommend-swipe .van-swipe__indicators .van-swipe__indicator {
+  background-color: #000000;
+  width: .22rem;
+  height: .01rem;
+  border-radius: 0rem;
+}
+
+/* 轮播样式 end */
+/* ysy start 20200323 */
+/* 搜索样式 start */
+
+.van-search__content {
+  border-radius: .4rem;
+  background: #F1F1F1;
+}
+
+.van-search__action {
+  font-family: "PingFangSC-Regular";
+  font-size: 16px;
+  color: #666666;
+  letter-spacing: 0;
+  line-height: .3rem;
+}
+
+/* 搜索样式 end */
+
+.subscribe_buttom {
+  border-radius: 2px;
+  border: 0 solid #FFA900;
+}
+
+/* ysy end 20200323 */
