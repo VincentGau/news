@@ -99,46 +99,47 @@
       <div class="cm-recommend-info">
         <p>为您推荐</p>
         <div class="recommend-box">
-          <div class="cm-recommend-item">
-            <ul>
-              <li><span>17.86%</span><span>安信消费医药主题 000974</span></li>
-              <li>
-                <span>近一月涨幅</span><span>医药行业暖风颇现，消费至上</span>
-              </li>
-            </ul>
-          </div>
-          <div class="cm-recommend-item">
-            <ul>
-              <li><span>17.86%</span><span>大成策略回报 090007</span></li>
-              <li><span>近一月涨幅</span><span>专注高成长低估值企业</span></li>
-            </ul>
-          </div>
-          <div class="cm-recommend-item">
-            <ul>
-              <li><span>17.86%</span><span>农银汇理策略精选 660010</span></li>
-              <li><span>近一月涨幅</span><span>多策略精选个股</span></li>
-            </ul>
-          </div>
+          <Recommend-Product
+            v-for="product in RecommemdProductList"
+            :key="product.id"
+            :product="product"
+          ></Recommend-Product>
         </div>
       </div>
     </div>
-
-    <van-popup v-model="shareShow" position="bottom" :style="{ height: '24%' }"
-      >分享</van-popup
-    >
   </div>
 </template>
 
 <script>
+import RecommendProduct from '../../components/recommendProduct'
 import '../../assets/css/master.css'
+import axios from 'axios'
+
 export default {
+  components: {
+    RecommendProduct
+  },
   data() {
     return {
       praise: true,
-      shareShow: false
+      shareShow: false,
+      articleId: '',
+      RecommemdProductList: []
     }
   },
-  mounted() {},
+  created() {
+    this.articleId = this.$route.query.articleId
+    console.log('文章id', this.articleId)
+  },
+  mounted() {
+    axios
+      .get('/getRecommemdProductList')
+      .then(response => {
+        console.log(response.data.data)
+        this.RecommemdProductList = response.data.data
+      })
+      .catch(error => console.log(error))
+  },
   methods: {
     onClickLeft() {
       // 返回
@@ -146,7 +147,6 @@ export default {
     },
     onClickRight() {
       // 分享
-      this.shareShow = true
     },
     cancelPraise() {
       // 取消点赞

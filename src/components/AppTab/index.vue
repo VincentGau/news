@@ -10,6 +10,7 @@
       line-width="32px"
       line-height="2px"
       swipe-threshold="5"
+      duration="0.3"
     >
       <van-tab
         v-for="(item, index) in tab"
