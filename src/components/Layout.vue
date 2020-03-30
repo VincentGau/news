@@ -12,9 +12,7 @@ import AppTab from './AppTab'
 import AppMain from './AppMain'
 
 export default {
-    components: {AppHeader, AppTab, AppMain}
+  components: { AppHeader, AppTab, AppMain }
 }
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

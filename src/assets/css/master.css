@@ -5,15 +5,7 @@
   background-color: #ffffff;
 }
 
-/* tab 上边框 */
-.van-hairline--top-bottom::after {
-  border: none;
-}
 
-
-.van-tabs__wrap {
-  border-bottom: 1px solid #E5E5E5;
-}
 
 .cm-news-item {
   border-bottom: 1px solid #f1f1f1;
@@ -337,3 +329,16 @@
 }
 
 /* ysy end 20200323 */
+/* header tab start*/
+.van-hairline--top-bottom::after {
+  border: none;
+}
+
+
+.van-tabs__wrap {
+  border-bottom: 1px solid #E5E5E5;
+}
+
+
+
+/* header tab end*/

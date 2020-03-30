@@ -14,7 +14,7 @@
           <img :src="item.coverUrl" class="imag" />
           <div class="introduce">
             <div class="swipe-img-tit">
-              {{ item.content }}
+              {{ item.title }}
             </div>
             <div class="swipe-img-info">
               <span class="swipe-img-name">{{ item.source }}</span>

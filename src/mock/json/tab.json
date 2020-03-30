@@ -1,0 +1,41 @@
+{
+  "retcode": "0000",
+  "retmsg": "成功",
+  "data": [
+    {
+      "tabId": 1,
+      "tabShowName": "推荐",
+      "tabName": "recommend"
+    },
+    {
+      "tabId": 2,
+      "tabShowName": "7×24",
+      "tabName": "7x24"
+    },
+    {
+      "tabId": 3,
+      "tabShowName": "意见领袖",
+      "tabName": "opinion"
+    },
+    {
+      "tabId": 4,
+      "tabShowName": "基金",
+      "tabName": "fund"
+    },
+    {
+      "tabId": 5,
+      "tabShowName": "保险",
+      "tabName": "insurance"
+    },
+    {
+      "tabId": 6,
+      "tabShowName": "外汇",
+      "tabName": "exchange"
+    },
+    {
+      "tabId": 7,
+      "tabShowName": "黄金",
+      "tabName": "gold"
+    }
+  ]
+}

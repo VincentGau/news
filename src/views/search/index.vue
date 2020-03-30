@@ -41,12 +41,11 @@
         </div>
         <div class="cm-news-list">
           <van-list
-            v-model="loading"
-            :finished="finished"
-            loading-text="正在刷新"
-            finished-text="没有更多了"
-            @load="onLoad"
+            v-model="isUploading"
+            :finished="upFinished"
+            @load="onLoadList"
             :offset="10"
+            loading-text="正在刷新"
           >
             <ListItem
               v-for="article in articles"
@@ -80,8 +79,8 @@ export default {
   },
   data() {
     return {
-      finished: false,
-      isLoading: false,
+      isUploading: false, //是否处于上拉加载状态
+      upFinished: false, //数据加载是否完毕
       searchvalue: '',
       show: true,
       loading: false,
@@ -97,10 +96,17 @@ export default {
     this.inita()
   },
   methods: {
-    onLoad() {
-      // 上拉刷新
+    // 上拉刷新
+    onLoadList() {
+      const _this = this
       setTimeout(() => {
-        this.finished = true
+        axios
+          .get('/getList')
+          .then(response => {
+            _this.articles.push(response.data.data[0])
+            _this.isUploading = false
+          })
+          .catch(error => console.log(error))
       }, 1000)
     },
     // 清空历史

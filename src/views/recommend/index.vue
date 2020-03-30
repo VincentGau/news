@@ -1,12 +1,12 @@
 <template>
   <van-list
-    v-model="load"
-    :finished="finished"
-    @load="onLoad"
+    v-model="isUploading"
+    :finished="upFinished"
+    @load="onLoadList"
     :offset="10"
     loading-text="正在刷新"
   >
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh(-1)">
+    <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
       <div class="cm-news-list">
         <van-skeleton
           v-for="i in 5"
@@ -44,45 +44,63 @@ export default {
   },
   data() {
     return {
-      load: false,
-      finished: false,
-      isLoading: false,
+      isUploading: false, //是否处于上拉加载状态
+      upFinished: false, //数据加载是否完毕
+      isDownLoading: false, //是否处于下拉刷新状态
+      loading: true, //骨架屏状态
       articles: [],
-      loading: true,
       Swipers: []
     }
   },
   mounted() {
-    // 获取数据
-    axios
-      .get('/getList')
-      .then(response => {
-        this.articles = response.data.data
-        this.loading = false
-      })
-      .catch(error => console.log(error))
-  },
-  created() {
-    this.inita()
+    this.getDataList()
+    this.getBanner()
   },
   methods: {
-    onLoad(code) {
-      // 上拉刷新
+    // 获取新闻列表数据
+    getDataList() {
+      const _this = this
+      axios
+        .get('/getList')
+        .then(response => {
+          _this.articles = response.data.data
+          _this.loading = false
+        })
+        .catch(error => console.log(error))
     },
-    inita() {
-      axios.get('/getRecommendNewsInfo4Banner').then(data => {
-        this.Swipers = data.data.data
-        // console.log(this.Swipers)
-      })
+    getBanner() {
+      const _this = this
+      axios
+        .get('/getRecommendNewsInfo4Banner')
+        .then(response => {
+          _this.Swipers = response.data.data
+          _this.loading = false
+        })
+        .catch(error => console.log(error))
     },
-    onRefresh() {
-      // 下拉刷新
-      this.finished = false
-      this.isLoading = false
-      this.$toast({
-        message: '刷新成功',
-        position: 'center'
-      })
+    // 上拉刷新
+    onLoadList() {
+      const _this = this
+      setTimeout(() => {
+        axios
+          .get('/getList')
+          .then(response => {
+            _this.articles.push(response.data.data[0])
+            _this.isUploading = false
+          })
+          .catch(error => console.log(error))
+      }, 1000)
+    },
+    // 下拉刷新
+    onDownRefresh() {
+      const _this = this
+      setTimeout(() => {
+        _this.$toast({
+          message: '加载成功',
+          position: 'center'
+        })
+        _this.isDownLoading = false
+      }, 1000)
     }
   }
 }

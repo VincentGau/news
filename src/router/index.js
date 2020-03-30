@@ -36,30 +36,7 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/news',
-    component: Layout,
-    children: [
-      {
-        path: '/',
-        component: () =>
-          import(/* webpackChunkName: "news" */ '../views/news/'),
-        meta: { title: '要闻' }
-      }
-    ]
-  },
-  {
-    path: '/financing',
-    component: Layout,
-    children: [
-      {
-        path: '/',
-        component: () =>
-          import(/* webpackChunkName: "financing" */ '../views/financing/'),
-        meta: { title: '理财' }
-      }
-    ]
-  },
+
   {
     path: '/fund',
     component: Layout,
@@ -72,17 +49,64 @@ const routes = [
       }
     ]
   },
+
   {
-    path: '/preciousMetal',
+    path: '/7x24',
     component: Layout,
     children: [
       {
         path: '/',
         component: () =>
-          import(
-            /* webpackChunkName: "preciousMetal" */ '../views/preciousMetal/'
-          ),
-        meta: { title: '贵金属' }
+          import(/* webpackChunkName: "7x24" */ '../views/7x24/'),
+        meta: { title: '7x24' }
+      }
+    ]
+  },
+  {
+    path: '/opinion',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        component: () =>
+          import(/* webpackChunkName: "opinion" */ '../views/opinion/'),
+        meta: { title: '意见领袖' }
+      }
+    ]
+  },
+  {
+    path: '/insurance',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        component: () =>
+          import(/* webpackChunkName: "insurance" */ '../views/insurance/'),
+        meta: { title: '保险' }
+      }
+    ]
+  },
+  {
+    path: '/exchange',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        component: () =>
+          import(/* webpackChunkName: "exchange" */ '../views/exchange/'),
+        meta: { title: '外汇' }
+      }
+    ]
+  },
+  {
+    path: '/gold',
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        component: () =>
+          import(/* webpackChunkName: "gold" */ '../views/gold/'),
+        meta: { title: '黄金' }
       }
     ]
   },

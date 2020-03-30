@@ -17,6 +17,7 @@ Mock.mock('/getDetails', 'get', returnBack)
 Mock.mock('/getSearchHotKeyWordList', 'get', require('./json/search.json'))
 Mock.mock('/getRecommendNewsInfo4Banner', 'get', require('./json/banner.json'))
 Mock.mock('/gethistory', 'get', require('./json/history.json'))
+Mock.mock('/getNewsTabList', 'get', require('./json/tab.json'))
 function returnBack(prarms) {
   //prarms为前端传来到请求内容：  {url: "/testInfo2", type: "GET", body: "{"xm":"11"}"}
   console.log(prarms)

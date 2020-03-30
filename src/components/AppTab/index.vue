@@ -13,11 +13,11 @@
       duration="0.3"
     >
       <van-tab
-        v-for="(item, index) in tab"
+        v-for="(item, index) in tabNameList"
         :key="index"
-        :title="item.title"
-        :to="item.url"
-        :name="item.name"
+        :title="item.tabShowName"
+        :to="item.tabName"
+        :name="item.tabName"
       >
         <app-main></app-main>
       </van-tab>
@@ -26,44 +26,20 @@
 </template>
 <script>
 import AppMain from '../AppMain'
-
+import axios from 'axios'
 export default {
   name: 'AppTab',
   components: { AppMain },
   data() {
     return {
-      active: 1,
-      tab: [
-        {
-          name: 'recommend',
-          title: '推荐',
-          url: 'recommend'
-        },
-        {
-          name: 'news',
-          title: '要闻',
-          url: 'news'
-        },
-        {
-          name: 'fund',
-          title: '基金',
-          url: 'fund'
-        },
-        {
-          name: 'financing',
-          title: '理财',
-          url: 'financing'
-        },
-        {
-          name: 'preciousMetal',
-          title: '贵金属',
-          url: 'preciousMetal'
-        }
-      ] //后台获取tab标签
+      active: 0,
+      tabNameList: []
     }
   },
+
+  created() {},
   mounted() {
-    this.updateTab() //刷新H5时
+    this.getTabName()
   },
   methods: {
     tabChange(name, title) {
@@ -71,11 +47,22 @@ export default {
     },
     updateTab() {
       let path = location.pathname
-      this.tab.map((item, index) => {
-        if ('/' + item.name == path) {
-          this.active = item.name
+      this.tabNameList.map((item, index) => {
+        if ('/' + item.tabName == path) {
+          this.active = item.tabName
         }
       })
+    },
+    // 获取tab数据
+    getTabName() {
+      axios
+        .get('/getNewsTabList')
+        .then(response => {
+          this.tabNameList = response.data.data
+          // 每次获取数据，说明重新进入页面，在这里进行路由和active的绑定
+          this.updateTab()
+        })
+        .catch(error => console.log(error))
     }
   }
 }

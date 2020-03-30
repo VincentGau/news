@@ -83,16 +83,15 @@ export default {
   },
   data() {
     return {
-      articleId: '',
-      RecommemdProductList: [],
-      NewsDetail: {},
-      relevantInformation: {},
-      loading: true
+      articleId: '', //文章id
+      RecommemdProductList: [], //推荐产品数据
+      NewsDetail: {}, //文章详细信息
+      relevantInformation: {}, //相关资讯
+      loading: true //骨架屏状态
     }
   },
   created() {
     this.articleId = this.$route.query.articleId
-    // console.log('文章id', this.articleId)
   },
   mounted() {
     // 获取推荐产品数据
@@ -165,4 +164,4 @@ export default {
 .header .van-hairline--bottom::after {
   border-bottom-color: white;
 }
-</style> 
+</style>
