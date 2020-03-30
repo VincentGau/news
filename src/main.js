@@ -19,12 +19,13 @@ import {
   Loading,
   Search,
   Tag,
-  Button
+  Button,
+  Popup
 } from 'vant'
 Vue.use(Button)
 Vue.use(Tag)
 Vue.use(Search)
-
+Vue.use(Popup)
 Vue.use(Swipe)
 Vue.use(SwipeItem)
 Vue.use(List)

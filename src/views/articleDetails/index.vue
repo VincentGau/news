@@ -1,7 +1,18 @@
 <template>
   <div>
-    <van-nav-bar title="文章详情" left-text="" left-arrow>
-      <van-icon name="share" slot="right" />
+    <van-nav-bar
+      title="文章详情"
+      left-text=""
+      left-arrow
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
+      <img
+        class="share-icon"
+        src="../../assets/img/icon-share@2x.png"
+        alt=""
+        slot="right"
+      />
     </van-nav-bar>
 
     <div class="cm-article-page">
@@ -111,6 +122,10 @@
         </div>
       </div>
     </div>
+
+    <van-popup v-model="shareShow" position="bottom" :style="{ height: '24%' }"
+      >分享</van-popup
+    >
   </div>
 </template>
 
@@ -119,20 +134,51 @@ import '../../assets/css/master.css'
 export default {
   data() {
     return {
-      praise: true
+      praise: true,
+      shareShow: false
     }
   },
-  mounted() {
-    // 获取数据
-  },
+  mounted() {},
   methods: {
+    onClickLeft() {
+      // 返回
+      this.$router.go(-1)
+    },
+    onClickRight() {
+      // 分享
+      this.shareShow = true
+    },
     cancelPraise() {
+      // 取消点赞
       this.praise = false
     },
     givePraise() {
+      // 点赞
       this.praise = true
     }
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.van-nav-bar__right {
+  font-size: 0.6rem;
+}
+.share-icon {
+  height: 0.4rem;
+  width: 0.34rem;
+}
+.van-nav-bar__left .van-nav-bar__arrow {
+  font-size: 0.4rem;
+  color: #333333;
+}
+.van-nav-bar__title {
+  font-size: 0.36rem;
+  font-family: 'PingFangSC-Medium';
+  color: #000000;
+  letter-spacing: 0.58px;
+  text-align: center;
+}
+.header .van-hairline--bottom::after {
+  border-bottom-color: white;
+}
+</style>

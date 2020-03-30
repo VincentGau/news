@@ -38,7 +38,7 @@
             </div>
             <div class="cm-news-info">
               <span class="cm-news-name">新财富杂志</span>
-              <span class="cm-news-read">10万阅读</span>
+              <span class="cm-news-read">100万阅读</span>
               <span class="cm-news-date">2020-02-22</span>
             </div>
           </div>
@@ -184,7 +184,7 @@ export default {
   line-height: 0.26rem;
   letter-spacing: 0;
   padding-left: 0.2rem;
-  font-family: PingFangSC-Regular;
+  font-family: 'PingFangSC-Regular';
   overflow: hidden;
   color: #ffffff;
 }
@@ -216,13 +216,13 @@ export default {
 }
 .swiper {
   padding-top: 0.2rem;
-  width: 95%;
+  width: 100%;
   height: 3.54rem;
   margin-right: 0.2rem;
 }
 .van-swipe {
   margin-right: 0.2rem;
-  width: 100%;
+  width: 95%;
   height: 100%;
 }
 .imag {

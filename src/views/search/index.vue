@@ -7,12 +7,14 @@
         placeholder="请输入搜索关键词"
         @search="onSearch"
         @cancel="onCancel"
+        @clear="onclear"
+        @blur="onblur"
       />
     </form>
     <!-- 热门 -->
     <div class="hot" v-show="show">
       <div class="hot_name">热门搜索</div>
-      <van-tag round class="lable" @click="hotval(event)">
+      <van-tag round class="lable" @click="hotval()" :ref="aaa">
         大家都在讨论
         <img src="../../assets/img/hot.png" class="hot_img" />
       </van-tag>
@@ -68,7 +70,7 @@
       <div class="result_header">
         <span>资讯</span>
       </div>
-      <div class="cm-news-item">
+      <div class="cm-news-item cm-bottom-noborder">
         <div class="cm-news-abstract">
           <div class="cm-news-tit">
             <span>广发基金刘格菘：2020年如何把握科技投资机遇</span>
@@ -83,7 +85,7 @@
           <img src="../../assets/img/news6-img.png" />
         </div>
       </div>
-      <div class="cm-news-item">
+      <div class="cm-news-item cm-bottom-noborder">
         <div class="cm-news-abstract">
           <div class="cm-news-tit">
             <span>海通证券基金业绩排行榜 | 南华基金权益类产品年度平均回…</span>
@@ -104,8 +106,8 @@
         <div class="subscribe_header">
           <span>订阅号</span>
         </div>
-        <div class="cm-article-authorInfo">
-          <div class="cm-author-img">
+        <div class="cm-article-authorInfo subscribe_authorInfo">
+          <div class="cm-author-img subscribe_author_img">
             <img src="../../assets/img/hot.png" />
             <img src="../../assets/img/v-icon@3x.png" />
           </div>
@@ -115,8 +117,8 @@
           </div>
           <div class="cm-author-nofocus subscribe_nofocus">关注</div>
         </div>
-        <div class="cm-article-authorInfo">
-          <div class="cm-author-img">
+        <div class="cm-article-authorInfo subscribe_authorInfo">
+          <div class="cm-author-img subscribe_author_img">
             <img src="../../assets/img/hot.png" />
             <img src="../../assets/img/v-icon@3x.png" />
           </div>
@@ -140,16 +142,39 @@
 
 <script>
 import '../../assets/css/master.css'
+// import './mock.js'
+// import Axios from 'axios'
 export default {
   data() {
     return {
       value: '',
-      show: true
+      show: true,
+      aaa: 'tag'
     }
   },
   methods: {
-    hotval(event) {
-      console.log(event, 111)
+    onblur() {
+      console.log(this.value, 222)
+      if (this.value == '') {
+        this.show = true
+      } else {
+        this.show = false
+      }
+    },
+    onclear() {
+      this.show = true
+    },
+    // inita(){
+    //   console.log("sssss")
+    //   Axios.get("http://test.com")
+    //   .then((data) => {
+    //     console.log(data)
+    //   })
+    // },
+    hotval() {
+      var tag = this.$refs.tag.innerHTML
+      this.value = tag.split('<img')[0]
+      this.show = false
     },
     onSearch(val) {
       if (val == '') {
@@ -253,7 +278,7 @@ export default {
 }
 /* 结果 */
 .result {
-  padding-left: 0.1rem;
+  padding-left: 0.2rem;
   background: #ffffff;
 }
 .result_header {
@@ -275,7 +300,7 @@ export default {
   width: 102%;
   height: 0.2rem;
   background: #f1f1f1;
-  margin-left: -0.1rem;
+  margin-left: -0.2rem;
 }
 .subscribe {
   position: relative;
@@ -288,16 +313,17 @@ export default {
 .subscribe_header span {
   position: relative;
   left: -3.1rem;
+  top: 0.2rem;
   font-family: 'PingFangSC-Regular';
   font-size: 17px;
   color: #222222;
   letter-spacing: 0;
   line-height: 0.31rem;
 }
-.subscribe_val {
+/* .subscribe_val {
   position: relative;
-  left: -1.2rem;
-}
+  left: -1rem;
+} */
 .subscribe_nofocus {
   position: relative;
   left: -0.5rem;
@@ -306,7 +332,7 @@ export default {
   width: 102%;
   height: 100%;
   background: #f1f1f1;
-  margin-left: -0.1rem;
+  margin-left: -0.2rem;
   /* position: fixed; */
 }
 .last {
@@ -331,5 +357,11 @@ export default {
   position: relative;
   left: -0.5rem;
   bottom: 0.15rem;
+}
+.subscribe_authorInfo {
+  border-bottom: 1px solid #f1f1f1;
+}
+.subscribe_author_img {
+  margin-left: 0.1rem;
 }
 </style>

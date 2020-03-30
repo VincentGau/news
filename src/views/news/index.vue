@@ -8,21 +8,26 @@
   >
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh(-1)">
       <div class="cm-news-list">
-        <div class="cm-news-item">
-          <div class="cm-news-abstract">
-            <div class="cm-news-tit">
-              <span>陈文龙：1.15黄金震荡上涨今日行情如何操作原油最新操作</span>
+        <router-link to="/articleDetails">
+          <div class="cm-news-item">
+            <div class="cm-news-abstract">
+              <div class="cm-news-tit">
+                <span
+                  >陈文龙：1.15黄金震荡上涨今日行情如何操作原油最新操作</span
+                >
+              </div>
+              <div class="cm-news-info">
+                <span class="cm-news-name">人民日报</span>
+                <span class="cm-news-read">30万阅读</span>
+                <span class="cm-news-date">2020-02-22</span>
+              </div>
             </div>
-            <div class="cm-news-info">
-              <span class="cm-news-name">人民日报</span>
-              <span class="cm-news-read">30万阅读</span>
-              <span class="cm-news-date">2020-02-22</span>
+            <div class="cm-news-img">
+              <img src="../../assets/img/news3-img.png" />
             </div>
           </div>
-          <div class="cm-news-img">
-            <img src="../../assets/img/news3-img.png" />
-          </div>
-        </div>
+        </router-link>
+
         <div class="cm-news-item">
           <div class="cm-news-abstract">
             <div class="cm-news-tit">
