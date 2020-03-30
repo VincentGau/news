@@ -1,0 +1,355 @@
+/* 新闻列表 start多页面可复用 */
+.cm-news-list {
+  padding-left: 0.32rem;
+  background-color: #fff;
+  margin-top: .02rem;
+}
+
+/* tab 上边框 */
+.van-hairline--top-bottom::after {
+  border-color: white;
+}
+
+.cm-news-item {
+  border-bottom: 1px solid #f1f1f1;
+  padding-right: 0.32rem;
+  padding-bottom: 0.34rem;
+  font-size: 0rem;
+}
+
+.cm-news-item .cm-news-abstract {
+  vertical-align: middle;
+  display: inline-block;
+  width: 4.3rem;
+  height: 1.44rem;
+  margin-top: 0.28rem;
+}
+
+.cm-news-item .cm-news-tit {
+  height: 0.96rem;
+  width: 4.3rem;
+  letter-spacing: 0;
+  font-family: PingFangSC-Regular;
+  text-align: justify;
+  line-height: 0.48rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #333;
+  font-size: 0.32rem;
+}
+
+.cm-news-item .cm-news-info {
+  font-size: 0rem;
+  margin-top: 0.36rem;
+}
+
+.cm-news-item .cm-news-info span {
+  line-height: 0.26rem;
+  letter-spacing: 0;
+  font-family: PingFangSC-Regular;
+  overflow: hidden;
+}
+
+.cm-news-item .cm-news-info .cm-news-name {
+  width: 1.3rem;
+  color: #333;
+  font-size: 0.26rem;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.cm-news-item .cm-news-info .cm-news-read {
+  width: 1.09rem;
+  margin-left: 0.26rem;
+  color: #999;
+  font-size: 0.26rem;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cm-news-item .cm-news-info .cm-news-date {
+  width: 1.55rem;
+  height: 0.26rem;
+  color: #999;
+  font-size: 0.26rem;
+  float: right;
+}
+
+.cm-news-item .cm-news-img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.32rem;
+  margin-top: 0.38rem;
+  width: 2.24rem;
+  height: 1.44rem;
+}
+
+.cm-news-item .cm-news-img img {
+  height: 100%;
+  width: 100%;
+}
+
+/* 大图片新闻布局 start */
+.cm-news-itemBigImg {
+  border-bottom: 1px solid #f1f1f1;
+  padding-right: 0.32rem;
+  padding-bottom: 0.34rem;
+  font-size: 0rem;
+  padding-top: 0.28rem;
+}
+
+.cm-news-itemBigImg .cm-news-tit {
+  /* margin-top: .28rem; */
+  letter-spacing: 0;
+  font-family: PingFangSC-Regular;
+  text-align: justify;
+  line-height: 0.48rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #333;
+  font-size: 0.32rem;
+}
+
+.cm-news-itemBigImg .cm-news-img {
+  width: 6.86rem;
+  height: 3.44rem;
+  margin-top: 0.24rem;
+}
+
+.cm-news-itemBigImg .cm-news-img img {
+  width: 100%;
+  height: 100%;
+}
+
+.cm-news-itemBigImg .cm-news-info {
+  margin-top: 0.22rem;
+  margin-bottom: 0.34rem;
+}
+
+.cm-news-itemBigImg .cm-news-info span {
+  line-height: 0.26rem;
+  letter-spacing: 0;
+  font-family: PingFangSC-Regular;
+  overflow: hidden;
+}
+
+.cm-news-itemBigImg .cm-news-info .cm-news-name {
+  width: 1.3rem;
+  color: #333;
+  font-size: 0.26rem;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.cm-news-itemBigImg .cm-news-info .cm-news-read {
+  width: 1.09rem;
+  margin-left: 0.26rem;
+  color: #999;
+  font-size: 0.26rem;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cm-news-itemBigImg .cm-news-info .cm-news-date {
+  width: 1.55rem;
+  height: 0.26rem;
+  color: #999;
+  font-size: 0.26rem;
+  float: right;
+}
+
+/* 大图片新闻布局 end */
+/* 新闻列表 end*/
+/* 文章详情页 start */
+.cm-article-page {
+  padding: 0.4rem 0.32rem 0.36rem 0.32rem;
+  height: 100%;
+  background-color: #fff;
+}
+
+.cm-article-page .cm-article-tit {
+  font-family: PingFangSC-Regular;
+  font-size: 0.4rem;
+  color: #000000;
+  letter-spacing: 0;
+  text-align: justify;
+  line-height: 0.54rem;
+}
+
+.cm-article-authorInfo {
+  height: 1.28rem;
+  display: flex;
+  align-items: center;
+}
+
+.cm-article-authorInfo .cm-author-img {
+  height: 0.64rem;
+  width: 0.64rem;
+  position: relative;
+}
+
+.cm-article-authorInfo .cm-author-img img:first-child {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.cm-article-authorInfo .cm-author-img img:nth-child(2) {
+  height: 0.24rem;
+  width: 0.24rem;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+.cm-article-authorInfo .cm-author-nameInfo {
+  margin-left: 0.2rem;
+}
+
+.cm-article-authorInfo .cm-author-nameInfo p:nth-child(1) {
+  font-family: PingFang-SC-Medium;
+  font-size: 0.28rem;
+  color: #333333;
+  letter-spacing: 0;
+  line-height: 0.28rem;
+}
+
+.cm-article-authorInfo .cm-author-nameInfo p:nth-child(2) {
+  font-family: SFUIDisplay-Regular;
+  font-size: 0.26rem;
+  color: #999999;
+  letter-spacing: 0;
+  line-height: 0.26rem;
+  margin-top: 0.12rem;
+}
+
+.cm-author-focus {
+  height: 0.44rem;
+  width: 1.2rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 0.04rem;
+  font-family: PingFang-SC-Medium;
+  font-size: 0.26rem;
+  color: #c4c4c4;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 0.44rem;
+  margin-left: auto;
+}
+
+.cm-author-nofocus {
+  height: 0.44rem;
+  width: 1.2rem;
+  border: 1px solid #ffa900;
+  border-radius: 0.04rem;
+  font-family: PingFang-SC-Medium;
+  font-size: 0.26rem;
+  color: #ffa900;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 0.44rem;
+  margin-left: auto;
+}
+
+.cm-article-content {
+  padding: 0.2rem 0;
+}
+
+.cm-article-content .cm-illustration-one {
+  width: 6.86rem;
+  height: 3.44rem;
+}
+
+.cm-article-content img {
+  width: 6.86rem;
+  height: 3.44rem;
+}
+
+.cm-article-content p {
+  padding: 0.2rem 0;
+  font-family: PingFangSC-Regular;
+  font-size: 0.3rem;
+  color: #333333;
+  letter-spacing: 0;
+  text-align: justify;
+  line-height: 0.5rem;
+  /* text-indent: .64rem; */
+}
+
+.cm-article-readdate {
+  font-size: 0.26rem;
+  letter-spacing: 0;
+  line-height: 0.26rem;
+}
+
+.cm-article-readdate span:nth-child(1) {
+  font-family: PingFangSC-Regular;
+  color: #2a2a2a;
+}
+
+.cm-article-readdate span:nth-child(2) {
+  margin-left: 0.44rem;
+  font-family: SFUIDisplay-Regular;
+  color: #666666;
+}
+
+.cm-article-praise {
+  margin: 0.32rem auto;
+  height: 0.98rem;
+  width: 0.96rem;
+  position: relative;
+  background: #fff;
+}
+
+.cm-article-praise img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: #f1f1f1 0px 0px 10px;
+}
+
+.cm-article-praise span {
+  position: absolute;
+  width: 0.96rem;
+  text-align: center;
+  left: 0;
+  bottom: 0.164rem;
+  font-family: SFUIDisplay-Regular;
+  font-size: 0.2rem;
+  color: #999999;
+  letter-spacing: 0;
+  line-height: 0.2rem;
+}
+
+.cm-statement-content p {
+  font-family: PingFang-SC-Medium;
+  font-size: 0.24rem;
+  color: #999999;
+  letter-spacing: 0;
+  line-height: 0.36rem;
+}
+
+/* 文章详情页 end */
+/* 关注列表 start */
+.cm-focuslist-page {
+  padding: 0 0 0 0.32rem;
+  height: 100%;
+  background-color: #fff;
+}
+
+.cm-focuslist-page .cm-article-authorInfo {
+  border-bottom: 1px solid #e5e5e5;
+  padding-right: 0.32rem;
+}
+
+/* 关注列表 end */
