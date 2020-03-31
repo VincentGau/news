@@ -6,6 +6,7 @@
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
+      :fixed="true"
     >
       <img
         class="share-icon"
@@ -92,32 +93,40 @@ export default {
   },
   created() {
     this.articleId = this.$route.query.articleId
+    this.scrollTop()
   },
   mounted() {
-    // 获取推荐产品数据
-    axios
-      .get('/getRecommemdProductList')
-      .then(response => {
-        this.RecommemdProductList = response.data.data
-      })
-      .catch(error => console.log(error))
-    //获取文章详情数据,
-    axios
-      .get('/getNewsDetail')
-      .then(response => {
-        this.NewsDetail = response.data.data
-        this.loading = false
-      })
-      .catch(error => console.log(error))
-    //获取相关资讯的数据
-    axios
-      .get('/getList')
-      .then(response => {
-        this.relevantInformation = response.data.data[0]
-      })
-      .catch(error => console.log(error))
+    this.getdata()
   },
   methods: {
+    scrollTop() {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+    },
+    getdata() {
+      // 获取推荐产品数据
+      axios
+        .get('/getRecommemdProductList')
+        .then(response => {
+          this.RecommemdProductList = response.data.data
+        })
+        .catch(error => console.log(error))
+      //获取文章详情数据,
+      axios
+        .get('/getNewsDetail')
+        .then(response => {
+          this.NewsDetail = response.data.data
+          this.loading = false
+        })
+        .catch(error => console.log(error))
+      //获取相关资讯的数据
+      axios
+        .get('/getList')
+        .then(response => {
+          this.relevantInformation = response.data.data[0]
+        })
+        .catch(error => console.log(error))
+    },
     onClickLeft() {
       // 返回
       this.$router.go(-1)

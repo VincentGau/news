@@ -5,6 +5,7 @@
       left-arrow
       @click-left="onClickLeft"
       @click-right="onClickRight"
+      :fixed="true"
     >
       <template #left>
         <van-icon name="cross" />

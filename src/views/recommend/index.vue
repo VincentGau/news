@@ -3,7 +3,7 @@
     v-model="isUploading"
     :finished="upFinished"
     @load="onLoadList"
-    :offset="10"
+    :offset="1"
     loading-text="正在刷新"
   >
     <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
@@ -31,14 +31,12 @@
   </van-list>
 </template>
 <script>
-import AppTab from '@/components/AppTab/'
 import '../../assets/css/master.css'
 import ListItem from '@/components/ListItem.vue'
 import Banners from '@/components/banner.vue'
 import axios from 'axios'
 export default {
   components: {
-    AppTab,
     ListItem,
     Banners
   },

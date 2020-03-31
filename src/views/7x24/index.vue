@@ -3,11 +3,11 @@
     v-model="isUploading"
     :finished="upFinished"
     @load="onLoadList"
-    :offset="10"
+    :offset="1"
     loading-text="正在刷新"
   >
     <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
-      <div class="cm-news-list">
+      <div class="cm-news-list" ref="list">
         <van-skeleton
           v-for="i in 5"
           :key="i"
@@ -28,13 +28,11 @@
 </template>
 
 <script>
-import AppTab from '@/components/AppTab/'
 import ListItem from '@/components/ListItem.vue'
 import axios from 'axios'
 import '../../assets/css/master.css'
 export default {
   components: {
-    AppTab,
     ListItem
   },
   data() {
@@ -49,8 +47,18 @@ export default {
   mounted() {
     // 获取数据
     this.getDataList()
+
+    window.addEventListener('scroll', this.handleScroll, true)
   },
   methods: {
+    handleScroll() {
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop
+
+      console.log(scrollTop)
+    },
     // 获取数据
     getDataList() {
       const _this = this

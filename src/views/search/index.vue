@@ -165,7 +165,7 @@ export default {
     },
     // 点击取消按钮后触发
     onCancel() {
-      this.$router.push('/recommend')
+      this.$router.go(-1)
     }
   }
 }

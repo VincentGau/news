@@ -16,7 +16,8 @@ import {
   Tag,
   Button,
   Popup,
-  Skeleton
+  Skeleton,
+  Sticky
 } from 'vant'
 
 // 注册到全局
@@ -35,3 +36,4 @@ Vue.use(PullRefresh)
 Vue.use(Loading)
 Vue.use(Toast)
 Vue.use(Skeleton)
+Vue.use(Sticky)
