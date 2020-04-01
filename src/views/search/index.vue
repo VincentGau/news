@@ -31,6 +31,9 @@
         <img src="../../assets/img/v-clears@2x.png" />
         <span class="cm-clears-val">清空搜索记录</span>
       </div>
+      <div class="cm-clears" v-show="!showclear">
+        <span class="cm-clears-val">暂无搜索历史记录</span>
+      </div>
     </div>
 
     <!-- 结果 -->
@@ -69,6 +72,7 @@ import SearchHistory from '@/components/searchHistory.vue'
 import SearchHot from '@/components/searchHot.vue'
 import CustomService from '@/components/customService.vue'
 import ListItem from '@/components/ListItem.vue'
+import {setLocalStorage} from '@/utils/local-storage'
 import axios from 'axios'
 export default {
   components: {
@@ -89,11 +93,14 @@ export default {
       historydata: [],
       articles: [],
       hotwordlist: [],
-      result: []
+      result: [],
     }
   },
   created() {
     this.inita()
+  },
+  mounted(){    
+    this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []    
   },
   methods: {
     // 上拉刷新
@@ -111,6 +118,7 @@ export default {
     },
     // 清空历史
     showclears() {
+      localStorage.setItem('searchHistory', '')
       this.showclear = false
     },
     //输入框失去焦点时触发
@@ -133,12 +141,12 @@ export default {
           this.hotwordlist = response.data.data
         })
         .catch(error => console.log(error))
-      axios
-        .get('/gethistory')
-        .then(response => {
-          this.historydata = response.data.data
-        })
-        .catch(error => console.log(error))
+      // axios
+      //   .get('/gethistory')
+      //   .then(response => {
+      //     this.historydata = response.data.data
+      //   })
+      //   .catch(error => console.log(error))
       axios
         .get('/getList')
         .then(response => {
@@ -148,24 +156,36 @@ export default {
     },
     // 点击热词搜索
     hotval(item) {
-      this.searchvalue = item.val
+      this.searchvalue = item.key
+      this.updateSearchHistory(item.key)
       this.show = false
     },
     // 点击历史搜索
     history(item) {
-      this.searchvalue = item.val
+      this.searchvalue = item
+      this.updateSearchHistory(item)
       this.show = false
     },
     onSearch(val) {
       if (val == '') {
         this.show = true
-      } else {
+      } else {        
+        this.updateSearchHistory(val)
         this.show = false
       }
     },
     // 点击取消按钮后触发
     onCancel() {
       this.$router.go(-1)
+    },
+
+    // 更新搜索历史记录
+    updateSearchHistory(val){
+      this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []
+      this.historydata.unshift(val)
+      let hSet = new Set(this.historydata)
+      this.historydata = [...hSet]
+      localStorage.setItem('searchHistory', JSON.stringify(this.historydata))
     }
   }
 }
