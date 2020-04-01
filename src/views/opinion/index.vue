@@ -1,12 +1,13 @@
 <template>
-  <van-list
-    v-model="isUploading"
-    :finished="upFinished"
-    @load="onLoadList"
-    :offset="1"
-    loading-text="正在刷新"
-  >
-    <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
+  <van-pull-refresh v-model="isDownLoading" @refresh="onDownRefresh">
+    <van-list
+      v-model="isUploading"
+      :finished="upFinished"
+      @load="onLoadList"
+      offset="10"
+      loading-text="正在刷新"
+      :immediate-check="false"
+    >
       <div class="cm-news-list">
         <van-skeleton
           v-for="i in 5"
@@ -17,14 +18,15 @@
           :loading="loading"
         >
         </van-skeleton>
+
         <List-Item
           v-for="article in articles"
           :key="article.id"
           :article="article"
         />
       </div>
-    </van-pull-refresh>
-  </van-list>
+    </van-list>
+  </van-pull-refresh>
 </template>
 
 <script>
@@ -71,7 +73,7 @@ export default {
             _this.isUploading = false
           })
           .catch(error => console.log(error))
-      }, 1000)
+      }, 2000)
     },
     // 下拉刷新
     onDownRefresh() {

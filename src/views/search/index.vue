@@ -42,22 +42,22 @@
         <div class="cm-result-header">
           <span>资讯</span>
         </div>
-        <div class="cm-news-list">
-          <van-list
-            v-model="isUploading"
-            :finished="upFinished"
-            @load="onLoadList"
-            :offset="10"
-            loading-text="正在刷新"
-          >
+        <van-list
+          v-model="isUploading"
+          :finished="upFinished"
+          @load="onLoadList"
+          :offset="10"
+          loading-text="正在刷新"
+        >
+          <div class="cm-news-list">
             <ListItem
               v-for="article in articles"
               :key="article.id"
               :article="article"
               class="cm-bottom-noborder"
             />
-          </van-list>
-        </div>
+          </div>
+        </van-list>
       </div>
     </div>
     <!-- 客服 -->
@@ -68,11 +68,11 @@
 </template>
 
 <script>
+import '../../assets/css/master.css'
 import SearchHistory from '@/components/searchHistory.vue'
 import SearchHot from '@/components/searchHot.vue'
 import CustomService from '@/components/customService.vue'
 import ListItem from '@/components/ListItem.vue'
-import {setLocalStorage} from '@/utils/local-storage'
 import axios from 'axios'
 export default {
   components: {
@@ -93,14 +93,14 @@ export default {
       historydata: [],
       articles: [],
       hotwordlist: [],
-      result: [],
+      result: []
     }
   },
   created() {
     this.inita()
   },
   mounted(){    
-    this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []    
+    
   },
   methods: {
     // 上拉刷新
@@ -141,12 +141,9 @@ export default {
           this.hotwordlist = response.data.data
         })
         .catch(error => console.log(error))
-      // axios
-      //   .get('/gethistory')
-      //   .then(response => {
-      //     this.historydata = response.data.data
-      //   })
-      //   .catch(error => console.log(error))
+
+      this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []   
+       
       axios
         .get('/getList')
         .then(response => {
@@ -169,7 +166,7 @@ export default {
     onSearch(val) {
       if (val == '') {
         this.show = true
-      } else {        
+      } else {
         this.updateSearchHistory(val)
         this.show = false
       }
@@ -178,7 +175,7 @@ export default {
     onCancel() {
       this.$router.go(-1)
     },
-
+    
     // 更新搜索历史记录
     updateSearchHistory(val){
       this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []
@@ -191,6 +188,10 @@ export default {
 }
 </script>
 <style scoped>
+.cm-news-list {
+  margin-top: 0;
+}
+
 /* 结果 */
 .cm-result {
   overflow: hidden;

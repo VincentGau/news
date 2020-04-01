@@ -10,11 +10,11 @@
         :swipeable="true"
         color="#00C3AC"
         title-active-color="#00C3AC"
-        line-width="32px"
-        line-height="2px"
+        line-width="32"
+        line-height="2"
         swipe-threshold="7"
         duration="0.3"
-        @change="onClickTab"
+        @click="onClickTab"
       >
         <van-tab
           v-for="(item, index) in tabNameList"
@@ -22,26 +22,41 @@
           :title="item.tabShowName"
           :name="item.tabShowName"
         >
-        </van-tab> </van-tabs
-    ></van-sticky>
+        </van-tab>
+      </van-tabs>
+    </van-sticky>
 
     <van-swipe
       class="my-swipe"
       :loop="false"
+      duration="500"
       :show-indicators="false"
       @change="onChangeSwiper"
       ref="swiper"
-      :lazy-render="true"
+      touchable
+      :moveStartThreshold="100"
     >
-      <van-swipe-item
-        ><keep-alive><recommend></recommend></keep-alive
-      ></van-swipe-item>
-      <van-swipe-item><allTime></allTime></van-swipe-item>
-      <van-swipe-item><opinion></opinion></van-swipe-item>
-      <van-swipe-item><fund></fund></van-swipe-item>
-      <van-swipe-item><insurance></insurance></van-swipe-item>
-      <van-swipe-item><exchange></exchange></van-swipe-item>
-      <van-swipe-item><gold></gold></van-swipe-item>
+      <van-swipe-item>
+        <recommend></recommend>
+      </van-swipe-item>
+      <van-swipe-item>
+        <allTime></allTime>
+      </van-swipe-item>
+      <van-swipe-item>
+        <opinion></opinion>
+      </van-swipe-item>
+      <van-swipe-item>
+        <fund></fund>
+      </van-swipe-item>
+      <van-swipe-item>
+        <insurance></insurance>
+      </van-swipe-item>
+      <van-swipe-item>
+        <exchange></exchange>
+      </van-swipe-item>
+      <van-swipe-item>
+        <gold></gold>
+      </van-swipe-item>
     </van-swipe>
   </div>
 </template>
@@ -72,6 +87,7 @@ export default {
     return {
       swiperItem: 0,
       active: '',
+
       tabNameList: []
     }
   },
@@ -85,11 +101,11 @@ export default {
     // 滑动页面切换tabbar，header状态
     onChangeSwiper(index) {
       var id = index + 1
-      // this.$refs.swiper.scrollTop = 0
-      document.body.scrollTop = 0
+      const $this = this
+
       this.tabNameList.map((item, index) => {
         if (id == item.tabId) {
-          this.active = item.tabShowName
+          $this.active = item.tabShowName
         }
       })
     },
@@ -123,6 +139,11 @@ export default {
 </script>
 
 <style scoped>
+.my-swipe .van-swipe-item {
+  height: 13rem !important;
+  overflow-y: scroll;
+}
+
 .van-nav-bar__left .van-nav-bar__arrow {
   font-size: 0.4rem;
   color: #333333;

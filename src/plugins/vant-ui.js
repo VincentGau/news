@@ -17,7 +17,10 @@ import {
   Button,
   Popup,
   Skeleton,
-  Sticky
+  Lazyload,
+  Sticky,
+  Step,
+  Steps
 } from 'vant'
 
 // 注册到全局
@@ -37,3 +40,8 @@ Vue.use(Loading)
 Vue.use(Toast)
 Vue.use(Skeleton)
 Vue.use(Sticky)
+Vue.use(Lazyload, {
+  lazyComponent: true
+})
+Vue.use(Step)
+Vue.use(Steps)

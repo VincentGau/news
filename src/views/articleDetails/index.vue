@@ -93,16 +93,12 @@ export default {
   },
   created() {
     this.articleId = this.$route.query.articleId
-    this.scrollTop()
   },
   mounted() {
     this.getdata()
   },
+
   methods: {
-    scrollTop() {
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
-    },
     getdata() {
       // 获取推荐产品数据
       axios

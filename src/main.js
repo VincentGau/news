@@ -10,10 +10,8 @@ import './plugins/vant-ui'
 import './plugins/rem.js'
 import './assets/css/reset.css'
 import 'vant/lib/index.css'
-
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
-
 new Vue({
   router,
   store,

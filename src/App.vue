@@ -1,9 +1,14 @@
 <template>
   <div id="app">
-    <router-view />
+    <keep-alive>
+      <router-view v-if="$route.meta.isKeepAlive" />
+    </keep-alive>
+    <router-view v-if="!$route.meta.isKeepAlive" />
   </div>
 </template>
-
+<script>
+export default {}
+</script>
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

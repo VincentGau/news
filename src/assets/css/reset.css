@@ -1,5 +1,7 @@
 /* 2018-12-28 */
-@charset "utf-8"; /* use YUI.reset */
+@charset "utf-8";
+
+/* use YUI.reset */
 html {
   height: 100%;
   -webkit-text-size-adjust: none;
@@ -20,6 +22,10 @@ body {
   overflow-x: hidden;
   outline: none;
   -webkit-tap-highlight-color: rbga(0, 0, 0, 0);
+}
+
+* {
+  -webkit-overflow-scrolling: touch;
 }
 
 body,
@@ -225,7 +231,7 @@ input:disabled {
   background-color: inherit;
 }
 
--webkit-input[type='text' i]:disabled {
+-webkit-input[type='text'i]:disabled {
   background-color: inherit;
 }
 
