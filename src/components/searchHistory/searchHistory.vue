@@ -9,7 +9,7 @@
     >
       <div class="cm-history-val">
         <img src="../../assets/img/v-search@2x.png" class="cm-history-img" />
-        <span>{{ item.key }}</span>
+        <span>{{ item }}</span>
       </div>
     </div>
   </div>
