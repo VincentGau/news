@@ -20,12 +20,19 @@ Vue.use(VueRouter)
 // 实际开发中，路由要动态添加。
 const routes = [
   {
+    path: '/',
+    name: 'home',
+
+    component: () =>
+      import(/* webpackChunkName: "home" */ '../views/home/home.vue')
+  },
+  {
     path: '/articleDetails',
     name: 'articleDetails',
 
     component: () =>
       import(
-        /* webpackChunkName: "articleDetails" */ '../views/articleDetails/index.vue'
+        /* webpackChunkName: "articleDetails" */ '../views/articleDetails/articleDetails.vue'
       )
   },
   {
@@ -33,19 +40,23 @@ const routes = [
     name: 'shareArticleDetails',
     component: () =>
       import(
-        /* webpackChunkName: "shareArticleDetails" */ '../views/shareArticleDetails/index.vue'
+        /* webpackChunkName: "shareArticleDetails" */ '../views/shareArticleDetails/shareArticleDetails.vue'
       )
   },
   {
     path: '/search',
     name: 'search',
-    component: () => import(/* webpackChunkName: "search" */ '../views/search/')
+    component: () =>
+      import(/* webpackChunkName: "search" */ '../views/search/search.vue')
   },
-  {
-    path: '/',
-    name: 'home',
 
-    component: () => import(/* webpackChunkName: "home" */ '../views/home/')
+  {
+    path: '/shortMessageDetails',
+    name: 'shortMessageDetails',
+    component: () =>
+      import(
+        /* webpackChunkName: "search" */ '../views/shortMessageDetails/shortMessageDetails.vue'
+      )
   }
 ]
 

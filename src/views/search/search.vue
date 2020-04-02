@@ -31,9 +31,6 @@
         <img src="../../assets/img/v-clears@2x.png" />
         <span class="cm-clears-val">清空搜索记录</span>
       </div>
-      <div class="cm-clears" v-show="!showclear">
-        <span class="cm-clears-val">暂无搜索历史记录</span>
-      </div>
     </div>
 
     <!-- 结果 -->
@@ -69,10 +66,10 @@
 
 <script>
 import '../../assets/css/master.css'
-import SearchHistory from '@/components/searchHistory.vue'
-import SearchHot from '@/components/searchHot.vue'
-import CustomService from '@/components/customService.vue'
-import ListItem from '@/components/ListItem.vue'
+import SearchHistory from '@/components/searchHistory/searchHistory.vue'
+import SearchHot from '@/components/searchHot/searchHot.vue'
+import CustomService from '@/components/customService/customService.vue'
+import ListItem from '@/components/ListItem/ListItem.vue'
 import axios from 'axios'
 export default {
   components: {
@@ -99,9 +96,6 @@ export default {
   created() {
     this.inita()
   },
-  mounted(){    
-    
-  },
   methods: {
     // 上拉刷新
     onLoadList() {
@@ -110,8 +104,7 @@ export default {
         axios
           .get('/getList')
           .then(response => {
-            _this.articles = _this.articles.concat(response.data.data)
-            console.log(_this.articles)
+            _this.articles.push(response.data.data[0])
             _this.isUploading = false
           })
           .catch(error => console.log(error))
@@ -119,7 +112,6 @@ export default {
     },
     // 清空历史
     showclears() {
-      localStorage.setItem('searchHistory', '')
       this.showclear = false
     },
     //输入框失去焦点时触发
@@ -142,9 +134,12 @@ export default {
           this.hotwordlist = response.data.data
         })
         .catch(error => console.log(error))
-
-      this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []   
-       
+      axios
+        .get('/gethistory')
+        .then(response => {
+          this.historydata = response.data.data
+        })
+        .catch(error => console.log(error))
       axios
         .get('/getList')
         .then(response => {
@@ -154,36 +149,24 @@ export default {
     },
     // 点击热词搜索
     hotval(item) {
-      this.searchvalue = item.key
-      this.updateSearchHistory(item.key)
+      this.searchvalue = item.val
       this.show = false
     },
     // 点击历史搜索
     history(item) {
-      this.searchvalue = item
-      this.updateSearchHistory(item)
+      this.searchvalue = item.val
       this.show = false
     },
     onSearch(val) {
       if (val == '') {
         this.show = true
       } else {
-        this.updateSearchHistory(val)
         this.show = false
       }
     },
     // 点击取消按钮后触发
     onCancel() {
       this.$router.go(-1)
-    },
-    
-    // 更新搜索历史记录
-    updateSearchHistory(val){
-      this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []
-      this.historydata.unshift(val)
-      let hSet = new Set(this.historydata)
-      this.historydata = [...hSet]
-      localStorage.setItem('searchHistory', JSON.stringify(this.historydata))
     }
   }
 }

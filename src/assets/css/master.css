@@ -2,15 +2,18 @@
 *::-webkit-scrollbar {
   width: 0;
 }
+
 /* 隐藏滚动条  end*/
 /* header tab start*/
 .van-hairline--top-bottom::after {
   border: none;
 }
 
+
 .van-tabs__wrap {
   border-bottom: 1px solid #e5e5e5;
 }
+
 /* header tab end*/
 /* 新闻列表 start多页面可复用 */
 
@@ -244,8 +247,8 @@
   background-color: #ffffff;
 }
 
-.cm-info-box > p,
-.cm-recommend-info > p {
+.cm-info-box>p,
+.cm-recommend-info>p {
   font-family: 'PingFangSC-Regular';
   font-size: 0.34rem;
   color: #333333;
@@ -344,6 +347,7 @@ body::-webkit-scrollbar {
   border: 0.02rem solid #00b893;
   border-radius: 50%;
 }
+
 .cm-van-step .van-step__circle {
   display: block;
   width: 0.1rem;
@@ -353,9 +357,11 @@ body::-webkit-scrollbar {
   background: #00b893;
   border-radius: 50%;
 }
+
 .van-step--vertical:not(:last-child)::after {
   border-bottom-width: 0;
 }
+
 /* 7X24 end*/
 
 /* ysy end  */
