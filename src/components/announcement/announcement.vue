@@ -13,4 +13,13 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.cm-statement-content p {
+  font-family: 'PingFang-SC-Medium';
+  text-align: left;
+  font-size: 0.24rem;
+  color: #999999;
+  letter-spacing: 0;
+  line-height: 0.36rem;
+}
+</style>

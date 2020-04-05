@@ -12,8 +12,10 @@
       <van-steps direction="vertical" :active="-1" active-color="#000">
         <van-step class="cm-van-step">2020-01-16 09:40</van-step>
         <van-step v-for="(item, index) in articles" :key="index">
-          <h3 class="cm-van-step-h3" @click="toDetails">{{ item.time }}</h3>
-          <p class="cm-van-step-p" @click="toDetails">{{ item.value }}</p>
+          <h3 class="cm-van-step-h3" @click="toDetails(item)">
+            {{ item.time }}
+          </h3>
+          <p class="cm-van-step-p" @click="toDetails(item)">{{ item.value }}</p>
         </van-step>
       </van-steps>
     </van-list>
@@ -38,9 +40,13 @@ export default {
     this.getDataList()
   },
   methods: {
-    toDetails() {
-      this.$router.push('/shortMessageDetails')
-      console.log('1', '')
+    toDetails(item) {
+      this.$router.push({
+        path: '/shortMessageDetails',
+        query: {
+          article: item
+        }
+      })
     },
     // 获取数据
     getDataList() {
@@ -91,7 +97,7 @@ export default {
   letter-spacing: 0;
   text-align: center;
   line-height: 0.26rem;
-  margin-top: 0.9rem;
+  /* margin-top: 0.9rem; */
   width: 100%;
   padding-top: 0.5rem;
   height: 0.6rem;

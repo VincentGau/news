@@ -1,16 +1,12 @@
 <template>
-  <div>
-    <van-nav-bar
-      :title="active"
-      left-text=""
-      left-arrow
-      :fixed="true"
-      :placeholder="true"
-      :z-index="99"
-    >
-      <van-icon name="search" slot="right" @click="tosearch" />
-    </van-nav-bar>
-    <van-sticky offset-top="46">
+  <div class="cm-page-container">
+    <div class="cm-van-header">
+      <van-nav-bar :title="active" left-text="" left-arrow>
+        <van-icon name="search" slot="right" @click="tosearch" />
+      </van-nav-bar>
+    </div>
+
+    <div class="cm-van-tabs">
       <van-tabs
         v-model="active"
         :swipeable="true"
@@ -30,31 +26,32 @@
         >
         </van-tab>
       </van-tabs>
-    </van-sticky>
-
-    <swiper ref="mySwiper" :options="swiperOption" class="myswiper">
-      <swiper-slide class="slides">
-        <recommend></recommend>
-      </swiper-slide>
-      <swiper-slide class="slides">
-        <allTime></allTime>
-      </swiper-slide>
-      <swiper-slide class="slides">
-        <opinion></opinion>
-      </swiper-slide>
-      <swiper-slide class="slides">
-        <fund></fund>
-      </swiper-slide>
-      <swiper-slide class="slides">
-        <insurance></insurance>
-      </swiper-slide>
-      <swiper-slide class="slides">
-        <exchange></exchange>
-      </swiper-slide>
-      <swiper-slide class="slides">
-        <gold></gold>
-      </swiper-slide>
-    </swiper>
+    </div>
+    <div class="cm-page-swiper" ref="swiperBox">
+      <swiper ref="mySwiper" :options="swiperOption" class="myswiper">
+        <swiper-slide class="slidesRecommend" ref="slides">
+          <recommend></recommend>
+        </swiper-slide>
+        <swiper-slide class="slidesAllTime">
+          <allTime></allTime>
+        </swiper-slide>
+        <swiper-slide class="slidesOpinion">
+          <opinion></opinion>
+        </swiper-slide>
+        <swiper-slide class="slidesFund">
+          <fund></fund>
+        </swiper-slide>
+        <swiper-slide class="slidesInsurance">
+          <insurance></insurance>
+        </swiper-slide>
+        <swiper-slide class="slidesExchange">
+          <exchange></exchange>
+        </swiper-slide>
+        <swiper-slide class="slidesGold">
+          <gold></gold>
+        </swiper-slide>
+      </swiper>
+    </div>
   </div>
 </template>
 <script>
@@ -107,6 +104,7 @@ export default {
 
   mounted() {
     this.getTabName()
+    this.$refs.swiperBox.addEventListener('scroll', this.setLeaveInfo, true)
   },
 
   methods: {
@@ -132,19 +130,80 @@ export default {
     // 搜索
     tosearch() {
       this.$router.push('/search')
+    },
+    //  每个页面的滚动条位置 记录与复原
+    setScrollTop(a, b, c, d, e, f, g) {
+      this.$nextTick(() => {
+        this.$el.querySelector('.slidesRecommend').scrollTop = a
+        this.$el.querySelector('.slidesAllTime').scrollTop = b
+        this.$el.querySelector('.slidesOpinion').scrollTop = c
+        this.$el.querySelector('.slidesFund').scrollTop = d
+        this.$el.querySelector('.slidesInsurance').scrollTop = e
+        this.$el.querySelector('.slidesExchange').scrollTop = f
+        this.$el.querySelector('.slidesGold').scrollTop = g
+      })
+    },
+    // 获取scrollTop存在本地
+    setPageScroll(a, b) {
+      b =
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        document.querySelector(a).scrollTop
+      sessionStorage.setItem(b, b)
+    },
+    setLeaveInfo() {
+      this.setPageScroll('.slidesRecommend', 'slidesRecommend')
+      this.setPageScroll('.slidesAllTime', 'slidesAllTime')
+      this.setPageScroll('.slidesOpinion', 'slidesOpinion')
+      this.setPageScroll('.slidesFund', 'slidesFund')
+      this.setPageScroll('.slidesFund', 'slidesFund')
+      this.setPageScroll('.slidesInsurance', 'slidesInsurance')
+      this.setPageScroll('.slidesExchange', 'slidesExchange')
+      this.setPageScroll('.slidesGold', 'slidesGold')
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    // 进入页面后进行路由判断
+    next(vm => {
+      if (from.name !== 'login') {
+        const slidesRecommend = sessionStorage.getItem('slidesRecommend')
+        const slidesAllTime = sessionStorage.getItem('slidesAllTime')
+        const slidesOpinion = sessionStorage.getItem('slidesOpinion')
+        const slidesFund = sessionStorage.getItem('slidesFund')
+        const slidesInsurance = sessionStorage.getItem('slidesInsurance')
+        const slidesExchange = sessionStorage.getItem('slidesExchange')
+        const slidesGold = sessionStorage.getItem('slidesGold')
+        vm.setScrollTop(
+          slidesRecommend,
+          slidesAllTime,
+          slidesOpinion,
+          slidesFund,
+          slidesInsurance,
+          slidesExchange,
+          slidesGold
+        )
+      }
+    })
   }
 }
 </script>
 
 <style scoped>
+.cm-page-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.myswiper {
+  height: 13rem;
+}
 .myswiper .swiper-slide {
-  height: 13rem !important;
+  height: 11.5rem !important;
   overflow-y: scroll;
 }
-.van-nav-bar {
-  z-index: 10;
-}
+
 .van-nav-bar__left .van-nav-bar__arrow {
   font-size: 0.4rem;
   color: #333333;
@@ -153,6 +212,7 @@ export default {
   font-size: 0.4rem;
   color: #666666;
 }
+
 .van-nav-bar__title {
   font-size: 0.36rem;
   font-family: 'PingFangSC-Medium';
