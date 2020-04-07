@@ -36,6 +36,7 @@ import '../../assets/css/master.css'
 import ListItem from '@/components/ListItem/ListItem.vue'
 import Banners from '@/components/banner/banner.vue'
 import axios from 'axios'
+import {getNewsTabList} from '@/api/api.js'
 export default {
   components: {
     ListItem,
@@ -52,6 +53,12 @@ export default {
     }
   },
   mounted() {
+    getNewsTabList().then((result)=>{
+      console.log(result)
+    }).catch((e)=>{
+      console.log(e)
+    })
+
     this.getDataList()
     this.getBanner()
   },
