@@ -92,6 +92,7 @@
     import Announcement from '../../components/announcement/announcement.vue'
     import praiseButton from '../../components/praiseButton/praiseButton.vue'
     import ListItem from '@/components/ListItem/ListItem.vue'
+    import {getNewsDetail} from '@/api/api.js'
 
     export default {
       components: {
@@ -125,14 +126,13 @@
               this.RecommemdProductList = response.data.data
             })
             .catch(error => console.log(error))
-          //获取文章详情数据,
-          this.$axios
-            .get('/getNewsDetail')
-            .then(response => {
-              this.NewsDetail = response.data.data
-              this.loading = false
-            })
-            .catch(error => console.log(error))
+          //获取文章详情数据,          
+          getNewsDetail().then(response => {
+            this.NewsDetail = response.data
+            console.log(this.NewsDetail)
+            this.loading = false
+          }).catch(error => console.log(error))
+
           //获取相关资讯的数据
           this.$axios
             .get('/getList')

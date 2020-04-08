@@ -38,6 +38,7 @@
     // import '../../assets/css/master.css'
     import ListItem from '@/components/ListItem/ListItem.vue'
     import Banners from '@/components/banner/banner.vue'
+    import {getRecommendNewsInfo4Banner, getNewsList} from '@/api/api.js'
     export default {
       components: {
         ListItem,
@@ -60,24 +61,16 @@
       methods: {
         // 获取新闻列表数据
         getDataList() {
-          const _this = this
-          this.$axios
-            .get('/getList')
-            .then(response => {
-              _this.articles = response.data.data
-              _this.loading = false
-            })
-            .catch(error => console.log(error))
+          getNewsList().then(response => {
+            this.articles = response.data
+            this.loading = false
+          }).catch(error => console.log(error))          
         },
         getBanner() {
-          const _this = this
-          this.$axios
-            .get('/getRecommendNewsInfo4Banner')
-            .then(response => {
-              _this.Swipers = response.data.data
-              _this.loading = false
-            })
-            .catch(error => console.log(error))
+          getRecommendNewsInfo4Banner().then(response => {
+            this.Swipers = response.data
+            this.loading = false 
+          }).catch(error => console.log(error))          
         },
         // 上拉刷新
         onLoadList() {
