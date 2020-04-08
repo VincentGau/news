@@ -4,7 +4,7 @@ const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 module.exports = {
   lintOnSave: false, // 关闭eslint规则
   devServer: {
-    port: 9000
+    port: 9000,
   },
 
   // css相关配置
@@ -14,6 +14,6 @@ module.exports = {
     // 开启 CSS source maps?
     sourceMap: false,
     // 启用 CSS modules for all css / pre-processor files.
-    modules: false
-  }
+    modules: false,
+  },
 }

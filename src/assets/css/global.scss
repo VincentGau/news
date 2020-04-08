@@ -1,0 +1,39 @@
+// 背景颜色
+$contentBackgroundColor: #ffffff;
+$darkBackGroundColor: #f1f1f1;
+// 常用字体
+$headerFontFamily: 'PingFangSC-Medium';
+$hanziFontFamily: 'PingFangSC-Regular';
+$numberFontFamily: 'SFUIDisplay-Regular';
+// 常用颜色
+$textHighLightColor: #000000;
+$textdarkColor: #333333;
+$textLightColor: #666666;
+$textLowColor: #999999;
+$tabActiveColor: #00b893;
+$secondTitColor: #222222;
+$recommendInterestRate: #e64545;
+$searchHotWordColor: #333330;
+$serviceBtnColor: #ffa900;
+$borderColor:#E5E5E5;
+$textArticleReadColor:#2a2a2a;
+// 文字对齐方式
+$textAlignLeft: left;
+$textAlignRight: right;
+$textAlignCenter: center;
+$textAlignJustify: justify;
+
+// 文字样式
+@mixin fontStyle($fontFamily,
+  $color,
+  $size,
+  $height,
+  $letterSpace,
+  $textAlign) {
+  font-family: $fontFamily;
+  color: $color;
+  font-size: $size;
+  line-height: $height;
+  letter-spacing: $letterSpace;
+  text-align: $textAlign;
+}

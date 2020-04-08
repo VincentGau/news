@@ -9,17 +9,20 @@
 
 <script>
 export default {
-  props: {}
+  props: {},
 }
 </script>
-
-<style scoped>
+<style lang="scss" type="text/css" scoped>
+@import '../../assets/css/global.scss';
 .cm-statement-content p {
-  font-family: 'PingFang-SC-Medium';
-  text-align: left;
-  font-size: 0.24rem;
-  color: #999999;
-  letter-spacing: 0;
-  line-height: 0.36rem;
+  @include fontStyle(
+    $hanziFontFamily,
+    $textLightColor,
+    0.28rem,
+    0.42rem,
+    0,
+    $textAlignLeft
+  );
+  // color: $testLightColor;
 }
 </style>

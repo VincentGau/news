@@ -1,0 +1,181 @@
+@import './global.scss';
+
+// header tab start
+
+
+.van-tab__text {
+    @include fontStyle($hanziFontFamily,
+        $textLightColor,
+        0.32rem,
+        0.32rem,
+        0,
+        $textAlignCenter);
+}
+
+.van-tabs__wrap {
+    border-bottom: 1px solid $borderColor;
+}
+
+.van-hairline--top-bottom::after {
+    border: none;
+}
+
+.van-hairline--bottom::after {
+    border: none;
+}
+
+// header tab end
+/* 触底刷新 样式 start */
+.van-loading {
+    height: 0.88rem;
+}
+
+/* 触底刷新样式 end */
+/* 隐藏滚动条 start */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/*隐藏侧边滚动条 end*/
+// nwesList start
+.cm-news-list {
+    background-color: $contentBackgroundColor;
+}
+
+// newsList end
+
+// articleDetails start
+.cm-article-page {
+    padding: 0.4rem 0.32rem 0.36rem 0.32rem;
+    height: 100%;
+    background-color: $contentBackgroundColor;
+    margin-top: 0.92rem;
+
+    .cm-article-tit {
+        @include fontStyle($hanziFontFamily,
+            $textHighLightColor,
+            0.4rem,
+            0.54rem,
+            0rem,
+            $textAlignJustify);
+    }
+
+    .cm-article-content {
+        padding: 0.2rem 0;
+
+        img {
+            width: 6.86rem;
+            height: 3.44rem;
+        }
+
+        p {
+            padding: 0.2rem 0;
+            @include fontStyle($hanziFontFamily,
+                $textdarkColor,
+                0.3rem,
+                0.5rem,
+                0rem,
+                $textAlignJustify);
+        }
+    }
+
+
+
+}
+
+.cm-bottom-box {
+    margin-top: 0.16rem;
+    background-color: $contentBackgroundColor;
+
+    .cm-info-box>p,
+    .cm-recommend-info>p {
+
+        padding-top: 0.6rem;
+        padding-left: 0.32rem;
+        @include fontStyle($hanziFontFamily,
+            $textdarkColor,
+            0.34rem,
+            0.34rem,
+            0,
+            $textAlignLeft);
+    }
+
+    .cm-recommend-info {
+        text-align: left;
+    }
+}
+
+.cm-bottom-noborder {
+    border: none;
+}
+
+
+// articleDetails end
+
+
+/* ysy start  */
+/* 轮播样式 start */
+.recommend-swipe {
+    height: 3rem;
+
+    .van-swipe__indicators {
+        width: 2rem;
+        bottom: 0.2rem;
+
+        .van-swipe__indicator {
+            background-color: #000000;
+            width: 0.22rem;
+            height: 0.01rem;
+            border-radius: 0rem;
+        }
+    }
+}
+
+/* 轮播样式 end */
+/* 搜索样式 start */
+
+.van-search__content {
+    border-radius: 0.4rem;
+    background: $darkBackGroundColor;
+}
+
+.van-search__action {
+    @include fontStyle($hanziFontFamily, $textLightColor, 0.32rem, 0.3rem, 0, null);
+}
+
+/* 搜索样式 end */
+
+.subscribe_buttom {
+    border-radius: 2px;
+    border: 0 solid $serviceBtnColor;
+}
+
+/* header tab end*/
+/* 7X24 start*/
+.van-step__circle {
+    display: block;
+    width: 0.1rem;
+    height: 0.1rem;
+    transform: rotate(90deg);
+    background: $contentBackgroundColor;
+    border: 0.02rem solid $tabActiveColor;
+    border-radius: 50%;
+}
+
+.cm-van-step-val .van-step__circle {
+    display: block;
+    width: 0.1rem;
+    height: 0.1rem;
+    transform: rotate(90deg);
+    border: 0.02rem solid $tabActiveColor;
+    background: $tabActiveColor;
+    border-radius: 50%;
+}
+
+.van-step--vertical:not(:last-child)::after {
+    border-bottom-width: 0;
+}
+
+/* 7X24 end*/
+
+/* ysy end  */

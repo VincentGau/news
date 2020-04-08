@@ -6,7 +6,11 @@
       @click="cancelPraise"
     />
 
-    <img v-else src="../../assets/img/nopraise-icon@2x.png" @click="givePraise" />
+    <img
+      v-else
+      src="../../assets/img/nopraise-icon@2x.png"
+      @click="givePraise"
+    />
 
     <span>{{ likeNum }}</span>
   </div>
@@ -16,11 +20,11 @@
 export default {
   props: {
     likeNum: Number,
-    isLike: Boolean
+    isLike: Boolean,
   },
   data() {
     return {
-      ispraise: this.isLike
+      ispraise: this.isLike,
     }
   },
 
@@ -34,37 +38,38 @@ export default {
       // 点赞
       this.ispraise = true
       this.$emit('Praise', this.ispraise)
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style scoped>
+<style lang="scss" type="text/css" scoped>
+@import '../../assets/css/global.scss';
 .cm-article-praise {
   margin: 0.32rem auto;
   height: 0.98rem;
   width: 0.96rem;
   position: relative;
-  background: #fff;
-}
-
-.cm-article-praise img {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  box-shadow: #f1f1f1 0px 0px 10px;
-}
-
-.cm-article-praise span {
-  position: absolute;
-  width: 0.96rem;
-  text-align: center;
-  left: 0;
-  bottom: 0.15rem;
-  font-family: 'SFUIDisplay-Regular';
-  font-size: 0.2rem;
-  color: #999999;
-  letter-spacing: 0;
-  line-height: 0.2rem;
+  background: $contentBackgroundColor;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: $darkBackGroundColor 0px 0px 10px;
+  }
+  span {
+    position: absolute;
+    width: 0.96rem;
+    left: 0;
+    bottom: 0.12rem;
+    @include fontStyle(
+      $numberFontFamily,
+      $textLowColor,
+      0.2rem,
+      0.2rem,
+      0,
+      $textAlignCenter
+    );
+  }
 }
 </style>

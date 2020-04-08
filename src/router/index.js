@@ -55,7 +55,7 @@ const routes = [
     name: 'shortMessageDetails',
     component: () =>
       import(
-        /* webpackChunkName: "search" */ '../views/shortMessageDetails/shortMessageDetails.vue'
+        /* webpackChunkName: "shortMessageDetails" */ '../views/shortMessageDetails/shortMessageDetails.vue'
       )
   }
 ]
