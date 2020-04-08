@@ -16,7 +16,14 @@
             class="cm-hot"
             v-show="show"
         >
-            <div class="cm-hot-name">热门搜索</div>
+            <div class="cm-hot-name">搜索推荐</div>
+            <van-skeleton
+                :row="1"
+                :loading="historyloading"
+                v-for="(item,index) in 6"
+                :key="index"
+                class="hot-van-skeleton"
+            ></van-skeleton>
             <div class="cm-lables">
                 <SearchHot
                     :list="hotwordlist"
@@ -31,6 +38,13 @@
             v-show="show"
         >
             <div class="cm-history-name">历史搜索</div>
+            <van-skeleton
+                :row="1"
+                :loading="historyloading"
+                v-for="(item,index) in 6"
+                :key="index"
+                class="history-van-skeleton"
+            ></van-skeleton>
             <SearchHistory
                 :list="historydata"
                 :showclear="showclear"
@@ -43,6 +57,9 @@
             >
                 <img src="../../assets/img/v-clears@2x.png" />
                 <span class="cm-clears-val">清空搜索记录</span>
+            </div>
+            <div class="cm-clears" v-show="!showclear">
+              <span class="cm-clears-val">暂无搜索历史记录</span>
             </div>
         </div>
 
@@ -81,7 +98,6 @@
 </template>
 
 <script>
-    // import '../../assets/css/master.css'
     import SearchHistory from '@/components/searchHistory/searchHistory.vue'
     import SearchHot from '@/components/searchHot/searchHot.vue'
     import CustomService from '@/components/customService/customService.vue'
@@ -100,6 +116,7 @@
           searchvalue: '',
           show: true,
           loading: false,
+          historyloading: true,
           showclear: true,
           // 数据
           historydata: [],
@@ -119,7 +136,7 @@
             this.$axios
               .get('/getList')
               .then(response => {
-                _this.articles.push(response.data.data[0])
+                _this.articles = _this.articles.concat(response.data.data)
                 _this.isUploading = false
               })
               .catch(error => console.log(error))
@@ -127,6 +144,7 @@
         },
         // 清空历史
         showclears() {
+          localStorage.setItem('searchHistory', '')
           this.showclear = false
         },
         //输入框失去焦点时触发
@@ -149,12 +167,11 @@
               this.hotwordlist = response.data.data
             })
             .catch(error => console.log(error))
-          this.$axios
-            .get('/gethistory')
-            .then(response => {
-              this.historydata = response.data.data
-            })
-            .catch(error => console.log(error))
+          
+          this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []  
+          console.log(this.historydata) 
+          this.historyloading = false
+
           this.$axios
             .get('/getList')
             .then(response => {
@@ -164,18 +181,23 @@
         },
         // 点击热词搜索
         hotval(item) {
-          this.searchvalue = item.val
+          this.searchvalue = item.key
+          this.updateSearchHistory(item.key)
+          this.showclear = true
           this.show = false
         },
         // 点击历史搜索
         history(item) {
-          this.searchvalue = item.val
+          this.searchvalue = item
+          this.updateSearchHistory(item)
+          this.showclear = true
           this.show = false
         },
         onSearch(val) {
           if (val == '') {
             this.show = true
           } else {
+            this.updateSearchHistory(val)
             this.show = false
           }
         },
@@ -185,6 +207,16 @@
             this.show = true
           }, 100)
           this.$router.go(-1)
+        },
+
+        // 更新搜索历史记录
+        updateSearchHistory(val){
+          this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []
+          this.historydata.unshift(val)
+          let hSet = new Set(this.historydata)
+          this.historydata = [...hSet]
+          console.log(this.historydata)
+          localStorage.setItem('searchHistory', JSON.stringify(this.historydata))
         }
       }
     }
@@ -206,7 +238,8 @@
     width: 100%;
     margin-left: 0.3rem;
     background: $contentBackgroundColor;
-    height: 0.8rem;
+    height: 0.96rem;
+    text-align: $textAlignLeft;
     padding-bottom: 0.05rem;
     border-bottom: 0.02rem solid $darkBackGroundColor;
   }
@@ -217,17 +250,16 @@
       0.34rem,
       0.34rem,
       0,
-      $textAlignCenter
+      $textAlignLeft
     );
     position: relative;
-    left: -3.1rem;
-    top: -0.03rem;
+    top: 0.2rem;
   }
 }
 /* 热 */
 .cm-hot {
   background: $contentBackgroundColor;
-  height: 2.64rem;
+  height: 2.7rem;
   .cm-hot-name {
     @include fontStyle(
       $headerFontFamily,
@@ -235,16 +267,15 @@
       0.34rem,
       0.34rem,
       0,
-      $textAlignCenter
+      $textAlignLeft
     );
-    position: relative;
-    left: -2.8rem;
-    top: 0.2rem;
+    margin-left: 0.32rem;
     margin-bottom: 0.2rem;
+    padding-top: 0.3rem;
   }
   .cm-lables {
     overflow: hidden;
-    padding-top: 0.3rem;
+    padding-top: 0.2rem;
     padding-left: 0.2rem;
     background: $contentBackgroundColor;
     height: 1.6rem;
@@ -258,13 +289,13 @@
   top: 3.55rem;
   bottom: 0;
   background: $contentBackgroundColor;
-  margin-top: 0.3rem;
+  margin-top: 0.4rem;
   .cm-history-name {
     @include fontStyle(
       $hanziFontFamily,
       $secondTitColor,
       0.34rem,
-      0.25rem,
+      0.5rem,
       0,
       $textAlignCenter
     );

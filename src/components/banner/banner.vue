@@ -12,6 +12,7 @@
                 :key="index"
             >
                 <router-link :to="{ path: '/articleDetails', query: { articleId: item.docId } }">
+
                     <img
                         :src="item.coverUrl"
                         class="imag"
@@ -20,7 +21,7 @@
                         <div class="swipe-img-tit">{{ item.title }}</div>
                         <div class="swipe-img-info">
                             <span class="swipe-img-name">{{ item.source }}</span>
-                            <span class="swipe-img-read">{{ item.readNum }}阅读</span>
+                            <span class="swipe-img-read"><i>{{ item.readNum }}</i>阅读</span>
                             <span class="swipe-img-date">{{ item.publishTime }}</span>
                         </div>
                     </div>
@@ -31,7 +32,6 @@
 </template>
 
 <script>
-    // import '../../assets/css/master.css'
     export default {
       props: {
         Swipers: {
@@ -43,7 +43,7 @@
 </script>
 
 <style lang="scss" type="text/css" scoped>
-@import '../../assets/css/main.scss';
+@import '../../assets/css/global.scss';
 .swiper {
   padding-top: 0.2rem;
   padding-left: 0.32rem;
@@ -120,11 +120,22 @@
             0,
             $textAlignRight
           );
+
           width: 1.09rem;
           margin-left: 0.52rem;
           float: left;
           text-overflow: ellipsis;
           white-space: nowrap;
+          i {
+            @include fontStyle(
+              $numberFontFamily,
+              $contentBackgroundColor,
+              0.26rem,
+              0.3rem,
+              0,
+              $textAlignLeft
+            );
+          }
         }
         .swipe-img-date {
           @include fontStyle(

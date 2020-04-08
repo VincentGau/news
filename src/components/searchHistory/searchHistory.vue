@@ -2,17 +2,17 @@
     <div>
         <div
             class="cm-history-vals"
-            v-for="(item, index) in list"
-            :key="index"
             @click="$emit('history', item)"
             v-show="showclear"
+            v-for="(item, index) in list"
+            :key="index"
         >
             <div class="cm-history-val">
                 <img
                     src="../../assets/img/v-search@2x.png"
                     class="cm-history-img"
                 />
-                <span>{{ item.key }}</span>
+                <span>{{ item }}</span>
             </div>
         </div>
     </div>
@@ -31,7 +31,9 @@
         }
       },
       data() {
-        return {}
+        return {
+          historyload: true
+        }
       },
       methods: {}
     }
@@ -41,22 +43,24 @@
 @import '../../assets/css/global.scss';
 .cm-history-vals {
   padding-left: 0.3rem;
+
   .cm-history-val {
     background: $contentBackgroundColor;
     height: 0.9rem;
+    box-sizing: border-box;
     border-bottom: 0.02rem solid #dbdbdb;
     span {
       @include fontStyle(
-        $headerFontFamily,
+        $hanziFontFamily,
         $textLightColor,
-        0.3rem,
+        0.26rem,
         0.29rem,
         0,
         null
       );
       float: left;
       margin-left: 0.15rem;
-      margin-top: 0.3rem;
+      margin-top: 0.32rem;
     }
     .cm-history-img {
       float: left;

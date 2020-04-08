@@ -1,5 +1,6 @@
 <template>
     <div class="cm-page-container">
+
         <div class="cm-van-header">
             <van-nav-bar
                 :title="active"
@@ -35,6 +36,7 @@
                 </van-tab>
             </van-tabs>
         </div>
+
         <div
             class="cm-page-swiper"
             ref="swiperBox"
@@ -73,7 +75,6 @@
     </div>
 </template>
 <script>
-    import '../../assets/css/main.scss'
     import recommend from '../recommend/recommend'
     import allTime from '../7x24/7x24'
     import opinion from '../opinion/opinion'
@@ -214,14 +215,15 @@
 @import '../../assets/css/global.scss';
 .cm-page-container {
   position: fixed;
-  top: 0;
-  bottom: 0;
+  // top: 0;
   right: 0;
   left: 0;
+  height: 16.5rem;
+  overflow-y: scroll;
   .myswiper {
-    height: 13rem;
+    height: 15.63rem;
     .swiper-slide {
-      height: 11.5rem;
+      height: 12.45rem;
       overflow-y: scroll;
     }
   }

@@ -39,11 +39,7 @@
                 {{ NewsDetail.title }}
             </div>
             <div class="cm-article-readdate cm-article-time">
-                <span>
-                    {{
-                        NewsDetail.publishTime ? NewsDetail.publishTime.substring(0, 10) : ''
-                      }}
-                </span>
+                <span>{{NewsDetail.publishTime}}</span>
             </div>
 
             <div
@@ -77,7 +73,6 @@
 
 <script>
     import RecommendProduct from '../../components/recommendProduct/recommendProduct.vue'
-    import '../../assets/css/main.scss'
     import Announcement from '../../components/announcement/announcement.vue'
     import praiseButton from '../../components/praiseButton/praiseButton.vue'
     import ListItem from '@/components/ListItem/ListItem.vue'
@@ -157,12 +152,19 @@
 
 <style lang="scss" type="text/css" scoped>
 @import '../../assets/css/global.scss';
-@import '../../assets/css/main.scss';
 .cm-article-val {
-  padding-top: 0.12rem;
+  padding-top: 0.12rem !important;
 }
 .cm-article-time {
-  margin-top: 0.21rem;
+  @include fontStyle(
+    $numberFontFamily,
+    $textLightColor,
+    0.26rem,
+    0.26rem,
+    0,
+    $textAlignLeft
+  );
+  padding-top: 0.3rem;
 }
 .van-nav-bar__right {
   font-size: 0.6rem;

@@ -76,11 +76,9 @@
 </template>
 
 <script>
-    import '../../assets/css/main.scss'
     import Announcement from '../../components/announcement/announcement.vue'
     import praiseButton from '../../components/praiseButton/praiseButton.vue'
     import ListItem from '@/components/ListItem/ListItem.vue'
-
     export default {
       components: {
         Announcement,

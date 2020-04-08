@@ -104,7 +104,7 @@
     }
 </script>
 <style lang="scss" type="text/css" scoped>
-@import '../../assets/css/main.scss';
+@import '../../assets/css/global.scss';
 .cm-van-refresh {
   @include fontStyle(
     $hanziFontFamily,
@@ -115,8 +115,9 @@
     $textAlignCenter
   );
   width: 100%;
-  padding-top: 0.5rem;
-  height: 0.6rem;
+  padding-top: 0.32rem;
+  padding-bottom: 0.33rem;
+  height: 0.26rem;
   background: $contentBackgroundColor;
 }
 .cm-van-step-val {
@@ -139,7 +140,7 @@
     0,
     $textAlignLeft
   );
-  /* margin-left: -5.5rem; */
+  padding-bottom: 0.2rem;
 }
 .cm-van-step-p {
   @include fontStyle(

@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <van-tag
             round
             class="cm-lable"
@@ -31,15 +32,15 @@
 @import '../../assets/css/global.scss';
 .cm-lable {
   @include fontStyle(
-    $headerFontFamily,
-    $textdarkColor,
+    $hanziFontFamily,
+    $searchHotWordColor,
     0.28rem,
     0.28rem,
     0,
     null
   );
   float: left;
-  height: 0.6rem;
+  height: 0.5rem;
   background: $darkBackGroundColor;
   margin-left: 0.2rem;
   margin-bottom: 0.2rem;

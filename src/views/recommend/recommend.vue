@@ -13,14 +13,18 @@
         >
             <div class="cm-news-list">
                 <van-skeleton
+                    :row="1"
+                    :loading="loading"
+                    class="cm-news-skeleton"
+                ></van-skeleton>
+                <van-skeleton
                     v-for="i in 5"
                     :key="i"
                     title
                     avatar
                     :row="3"
                     :loading="loading"
-                >
-                </van-skeleton>
+                ></van-skeleton>
                 <div class="swiper">
                     <Banners :Swipers="Swipers" />
                 </div>
@@ -35,7 +39,6 @@
     </van-pull-refresh>
 </template>
 <script>
-    // import '../../assets/css/master.css'
     import ListItem from '@/components/ListItem/ListItem.vue'
     import Banners from '@/components/banner/banner.vue'
     import {getRecommendNewsInfo4Banner, getNewsList} from '@/api/api.js'
@@ -51,7 +54,8 @@
           isDownLoading: false, //是否处于下拉刷新状态
           loading: true, //骨架屏状态
           articles: [],
-          Swipers: []
+          Swipers: [],
+          swiperloading: true
         }
       },
       mounted() {
@@ -70,7 +74,7 @@
           getRecommendNewsInfo4Banner().then(response => {
             this.Swipers = response.data
             this.loading = false 
-          }).catch(error => console.log(error))          
+          }).catch(error => console.log(error))        
         },
         // 上拉刷新
         onLoadList() {

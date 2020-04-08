@@ -1,46 +1,46 @@
 <template>
-  <div class="cm-article-praise">
-    <img
-      v-if="ispraise"
-      src="../../assets/img/praise-icon@2x.png"
-      @click="cancelPraise"
-    />
+    <div class="cm-article-praise">
+        <img
+            v-if="ispraise"
+            src="../../assets/img/praise-icon@2x.png"
+            @click="cancelPraise"
+        />
 
-    <img
-      v-else
-      src="../../assets/img/nopraise-icon@2x.png"
-      @click="givePraise"
-    />
+        <img
+            v-else
+            src="../../assets/img/nopraise-icon@2x.png"
+            @click="givePraise"
+        />
 
-    <span>{{ likeNum }}</span>
-  </div>
+        <span>{{ likeNum }}</span>
+    </div>
 </template>
 
 <script>
-export default {
-  props: {
-    likeNum: Number,
-    isLike: Boolean,
-  },
-  data() {
-    return {
-      ispraise: this.isLike,
-    }
-  },
+    export default {
+      props: {
+        likeNum: Number,
+        isLike: Boolean
+      },
+      data() {
+        return {
+          ispraise: this.isLike
+        }
+      },
 
-  methods: {
-    cancelPraise() {
-      // 取消点赞
-      this.ispraise = false
-      this.$emit('cancelPraise', this.ispraise)
-    },
-    givePraise() {
-      // 点赞
-      this.ispraise = true
-      this.$emit('Praise', this.ispraise)
-    },
-  },
-}
+      methods: {
+        cancelPraise() {
+          // 取消点赞
+          this.ispraise = false
+          this.$emit('cancelPraise', this.ispraise)
+        },
+        givePraise() {
+          // 点赞
+          this.ispraise = true
+          this.$emit('Praise', this.ispraise)
+        }
+      }
+    }
 </script>
 
 <style lang="scss" type="text/css" scoped>
