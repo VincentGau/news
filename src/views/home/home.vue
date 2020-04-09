@@ -10,19 +10,18 @@
                 <van-icon
                     name="search"
                     slot="right"
-                    @click="tosearch"
+                    @click="tosearch" 
                 />
             </van-nav-bar>
         </div>
 
-        <div class="cm-van-tabs">
+        <div class="cm-van-tabs tabbar-box-hidden">
+
             <van-tabs
                 v-model="active"
                 :swipeable="true"
                 color="#00C3AC"
                 title-active-color="#00C3AC"
-                line-width="32"
-                line-height="2"
                 swipe-threshold="7"
                 duration="0.3"
                 @click="onClickTab"
@@ -35,21 +34,21 @@
                 >
                 </van-tab>
             </van-tabs>
+
         </div>
 
         <div
             class="cm-page-swiper"
             ref="swiperBox"
+            @touchmove="touchMove()"
+            @touchstart="touchStart()"
         >
             <swiper
                 ref="mySwiper"
                 :options="swiperOption"
                 class="myswiper"
             >
-                <swiper-slide
-                    class="slidesRecommend"
-                    ref="slides"
-                >
+                <swiper-slide class="slide slidesRecommend">
                     <recommend></recommend>
                 </swiper-slide>
                 <swiper-slide class="slide slidesAllTime">
@@ -99,6 +98,10 @@
         const self = this
         return {
           active: '',
+          // 滑动距离监控
+          startX: 0,
+          startY: 0,
+          // 页面切换
           swiperOption: {
             autoplay: false,
             loop: false,
@@ -111,6 +114,7 @@
                 self.tabNameList.map((item, index) => {
                   if (this.activeIndex + 1 == item.tabId) {
                     self.active = item.tabShowName
+                    self.stickyAdjust()
                   }
                 })
               }
@@ -131,6 +135,7 @@
           this.tabNameList.map((item, index) => {
             if (name == item.tabShowName) {
               this.$refs.mySwiper.$swiper.slideTo(item.tabId - 1, 500, true)
+              this.stickyAdjust()
             }
           })
         },
@@ -168,6 +173,31 @@
             document.body.scrollTop ||
             document.querySelector(a).scrollTop
           sessionStorage.setItem(b, topNum)
+        },
+        //监听长按起始位置
+        touchStart() {
+          // event.preventDefault() //阻止默认事件（长按的时候出现复制）
+
+          this.startX = event.changedTouches[0].pageX
+          this.startY = event.changedTouches[0].pageY
+        },
+        // 根据滑动方向对布局进行处理
+        touchMove() {
+          // event.preventDefault()
+          var moveEndX = event.changedTouches[0].pageX
+          var moveEndY = event.changedTouches[0].pageY
+          var X = moveEndX - this.startX
+          var Y = moveEndY - this.startY
+          if (Math.abs(Y) > Math.abs(X) && Y > 0) {
+            // top to bottom 下滑
+            // alert('top to bottom')
+            this.stickyAdjust()
+          } else if (Math.abs(Y) > Math.abs(X) && Y < -50) {
+            this.$el.querySelector('.cm-van-header').style.display = 'none'
+          }
+        },
+        stickyAdjust() {
+          this.$el.querySelector('.cm-van-header').style.display = 'block'
         },
         setLeaveInfo() {
           this.setPageScroll('.slidesRecommend', 'slidesRecommend')
@@ -213,20 +243,28 @@
 
 <style lang="scss" type="text/css" scoped>
 @import '../../assets/css/global.scss';
+
 .cm-page-container {
   position: fixed;
-  // top: 0;
+  top: 0;
+  bottom: 0;
   right: 0;
   left: 0;
-  height: 16.5rem;
-  overflow-y: scroll;
-  .myswiper {
-    height: 15.63rem;
-    .swiper-slide {
-      height: 12.45rem;
-      overflow-y: scroll;
+  .cm-van-header {
+    display: block;
+  }
+
+  .cm-page-swiper {
+    height: 100%;
+    .myswiper {
+      height: 100%;
+      .slide {
+        height: 93%;
+        overflow-y: scroll;
+      }
     }
   }
+
   .van-nav-bar__left .van-nav-bar__arrow,
   .van-nav-bar__right .van-icon-search {
     @include fontStyle(null, $textdarkColor, 0.4rem, 0.92rem, 0, null);

@@ -1,19 +1,36 @@
 @import './global.scss';
 
+
+
 // header tab start
-
-
-.van-tab__text {
-    @include fontStyle($hanziFontFamily,
-        $textLightColor,
-        0.32rem,
-        0.32rem,
-        0,
-        $textAlignCenter);
+.van-nav-bar {
+    height: 0.9rem;
 }
 
-.van-tabs__wrap {
-    border-bottom: 1px solid $borderColor;
+
+.van-tabs {
+
+    .van-tabs__wrap {
+        border-bottom: 1px solid $borderColor;
+
+        .van-tabs__line {
+            width: 0.64rem;
+            height: 0.04rem;
+        }
+
+        .van-tab__text {
+            @include fontStyle($hanziFontFamily,
+                $textLightColor,
+                0.32rem,
+                0.32rem,
+                0,
+                $textAlignCenter);
+        }
+    }
+
+    .van-tabs__content {
+        background-color: red;
+    }
 }
 
 .van-hairline--top-bottom::after {
@@ -28,6 +45,7 @@
 /* 触底刷新 样式 start */
 .van-loading {
     height: 0.88rem;
+    background-color: $darkBackGroundColor;
 }
 
 
@@ -72,9 +90,6 @@
                 $textAlignJustify);
         }
     }
-
-
-
 }
 
 .cm-bottom-box {
@@ -83,7 +98,6 @@
 
     .cm-info-box>p,
     .cm-recommend-info>p {
-
         padding-top: 0.6rem;
         padding-left: 0.32rem;
         @include fontStyle($hanziFontFamily,
@@ -110,14 +124,12 @@
 /* ysy start  */
 /* 轮播样式 start */
 .recommend-swipe {
-    height: 3rem;
-
     .van-swipe__indicators {
         width: 2rem;
         bottom: 0.2rem;
 
         .van-swipe__indicator {
-            background-color: #000000;
+            background-color: $textHighLightColor;
             width: 0.22rem;
             height: 0.01rem;
             border-radius: 0rem;
@@ -127,10 +139,15 @@
 
 /* 轮播样式 end */
 /* 搜索样式 start */
+.cm-result .van-loading {
+    padding-bottom: .12rem;
+    background-color: $darkBackGroundColor;
+}
 
 .van-search__content {
     border-radius: 0.4rem;
     background: $darkBackGroundColor;
+
 }
 
 .van-search__action {

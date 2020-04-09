@@ -69,6 +69,9 @@
       span {
         display: inline-block;
         height: 0.3rem;
+        overflow: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
       }
 
       .cm-news-name {

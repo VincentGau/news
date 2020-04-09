@@ -89,7 +89,7 @@
         },
         // 下拉刷新
         onDownRefresh() {
-          console.log(this.articles)
+          // console.log(this.articles)
           const _this = this
           let time1 = setTimeout(() => {
             _this.$toast({
@@ -98,7 +98,7 @@
             })
             _this.isDownLoading = false
           }, 1000)
-          window.clearTimeout(times1)
+          // window.clearTimeout(time1)
         }
       }
     }

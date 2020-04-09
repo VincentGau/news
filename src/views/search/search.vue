@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="cm-van-search">
+        <div
+            class="cm-van-search"
+            v-show="show"
+        >
             <van-search
                 v-model="searchvalue"
                 show-action
@@ -64,11 +67,25 @@
         </div>
 
         <!-- 结果 -->
+
         <div v-show="!show">
             <div class="cm-result">
-                <div class="cm-result-header">
-                    <span>资讯</span>
+                <div class="cm-van-search">
+                    <van-search
+                        v-model="searchvalue"
+                        show-action
+                        placeholder="输入关键词查询"
+                        @search="onSearch"
+                        @cancel="onCancel"
+                        @clear="onclear"
+                        @blur="onblur"
+                    />
                 </div>
+                <van-sticky :offset-top="0">
+                    <div class="cm-result-header">
+                        <span>资讯</span>
+                    </div>
+                </van-sticky>
                 <van-list
                     v-model="isUploading"
                     :finished="upFinished"
@@ -167,7 +184,7 @@
               this.hotwordlist = response.data.data
             })
             .catch(error => console.log(error))
-          
+
           this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []  
           console.log(this.historydata) 
           this.historyloading = false
@@ -198,6 +215,7 @@
             this.show = true
           } else {
             this.updateSearchHistory(val)
+            this.showclear = true
             this.show = false
           }
         },
@@ -227,14 +245,11 @@
 .cm-result {
   overflow: hidden;
   background: $contentBackgroundColor;
-  height: 10rem;
+  height: 11rem;
   overflow-y: scroll;
-  .cm-news-list {
-    margin-top: 0.6rem;
-  }
   .cm-result-header {
-    position: fixed;
-    top: 0.9rem;
+    position: inherit;
+    /* top: 0.9rem; */
     width: 100%;
     margin-left: 0.3rem;
     background: $contentBackgroundColor;
@@ -255,6 +270,9 @@
     position: relative;
     top: 0.2rem;
   }
+}
+.van-list_loading {
+  height: 0;
 }
 /* 热 */
 .cm-hot {

@@ -1,17 +1,19 @@
 <template>
-    <van-pull-refresh
-        v-model="isDownLoading"
-        @refresh="onDownRefresh"
+    <van-list
+        v-model="isUploading"
+        :finished="upFinished"
+        offset="10"
+        loading-text="正在刷新"
+        :immediate-check="false"
+        @load="onLoadList"
     >
-        <van-list
-            v-model="isUploading"
-            :finished="upFinished"
-            @load="onLoadList"
-            offset="10"
-            loading-text="正在刷新"
-            :immediate-check="false"
+        <van-pull-refresh
+            v-model="isDownLoading"
+            @refresh="onDownRefresh"
         >
+
             <div class="cm-news-list">
+
                 <van-skeleton
                     :row="1"
                     :loading="loading"
@@ -34,9 +36,11 @@
                     :key="article.id"
                     :article="article"
                 />
+
             </div>
-        </van-list>
-    </van-pull-refresh>
+
+        </van-pull-refresh>
+    </van-list>
 </template>
 <script>
     import ListItem from '@/components/ListItem/ListItem.vue'
@@ -68,7 +72,7 @@
           getNewsList().then(response => {
             this.articles = response.data
             this.loading = false
-          }).catch(error => console.log(error))          
+          }).catch(error => console.log(error))    
         },
         getBanner() {
           getRecommendNewsInfo4Banner().then(response => {
@@ -76,7 +80,7 @@
             this.loading = false 
           }).catch(error => console.log(error))        
         },
-        // 上拉刷新
+        // 触底加载
         onLoadList() {
           const _this = this
           setTimeout(() => {
@@ -84,9 +88,12 @@
               .get('/getList')
               .then(response => {
                 _this.articles.push(response.data.data[0])
+
                 _this.isUploading = false
               })
-              .catch(error => console.log(error))
+              .catch(error => {
+                console.log(error)
+              })
           }, 2000)
         },
         // 下拉刷新

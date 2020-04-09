@@ -1,8 +1,8 @@
 <template>
     <div class="swiper">
         <van-swipe
-            :autoplay="2000"
-            :loop="true"
+            :autoplay="2000000"
+            :loop="false"
             indicator-color="#000000"
             :show-indicators="true"
             class="van-swipe recommend-swipe"
@@ -22,7 +22,7 @@
                         <div class="swipe-img-info">
                             <span class="swipe-img-name">{{ item.source }}</span>
                             <span class="swipe-img-read"><i>{{ item.readNum }}</i>阅读</span>
-                            <span class="swipe-img-date">{{ item.publishTime }}</span>
+                            <span class="swipe-img-date">{{  item.publishTime ? item.publishTime.substring(0, 10) : '' }}</span>
                         </div>
                     </div>
                 </router-link>
@@ -74,7 +74,7 @@
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0.71) 100%
       );
-      border-radius: 0.1rem;
+      border-radius: 0.2rem;
       .swipe-img-tit {
         @include fontStyle(
           $headerFontFamily,
@@ -84,18 +84,19 @@
           0,
           $textAlignJustify
         );
-        padding-left: 0.2rem;
-        padding-bottom: 0.16rem;
+        margin-left: 0.2rem;
         text-shadow: 0 0.02rem 0.02rem rgba(0, 0, 0, 0.5);
       }
       .swipe-img-info {
+        margin-top: 0.16rem;
+        height: 0.3rem;
+        padding-left: 0.2rem;
         span {
-          line-height: 0.26rem;
-          letter-spacing: 0;
-          padding-left: 0.2rem;
-          font-family: 'PingFangSC-Regular';
+          display: inline-block;
+          height: 0.3rem;
           overflow: hidden;
-          color: #ffffff;
+          text-overflow: clip;
+          white-space: nowrap;
         }
         .swipe-img-name {
           @include fontStyle(
@@ -106,10 +107,8 @@
             0,
             $textAlignLeft
           );
-          width: 1.3rem;
+          max-width: 25%;
           float: left;
-          text-overflow: ellipsis;
-          white-space: nowrap;
         }
         .swipe-img-read {
           @include fontStyle(
@@ -121,11 +120,9 @@
             $textAlignRight
           );
 
-          width: 1.09rem;
+          max-width: 25%;
           margin-left: 0.52rem;
           float: left;
-          text-overflow: ellipsis;
-          white-space: nowrap;
           i {
             @include fontStyle(
               $numberFontFamily,
@@ -147,7 +144,7 @@
             $textAlignRight
           );
           margin-left: 0.2rem;
-          width: 1.55rem;
+          width: 1.75rem;
           height: 0.26rem;
           float: left;
         }
