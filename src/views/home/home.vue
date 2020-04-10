@@ -10,7 +10,7 @@
                 <van-icon
                     name="search"
                     slot="right"
-                    @click="tosearch" 
+                    @click="tosearch"
                 />
             </van-nav-bar>
         </div>

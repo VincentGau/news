@@ -1,233 +1,221 @@
 <template>
-    <div>
-        <div
-            class="cm-van-search"
-            v-show="show"
-        >
-            <van-search
-                v-model="searchvalue"
-                show-action
-                placeholder="输入关键词查询"
-                @search="onSearch"
-                @cancel="onCancel"
-                @clear="onclear"
-                @blur="onblur"
-            />
-        </div>
-        <!-- 热门 -->
-        <div
-            class="cm-hot"
-            v-show="show"
-        >
-            <div class="cm-hot-name">搜索推荐</div>
-            <van-skeleton
-                :row="1"
-                :loading="historyloading"
-                v-for="(item,index) in 6"
-                :key="index"
-                class="hot-van-skeleton"
-            ></van-skeleton>
-            <div class="cm-lables">
-                <SearchHot
-                    :list="hotwordlist"
-                    @hot="hotval($event)"
-                />
-            </div>
-        </div>
+  <div>
+    <div class="cm-van-search" v-show="show">
+      <van-search
+        v-model="searchvalue"
+        show-action
+        placeholder="输入关键词查询"
+        @search="onSearch"
+        @cancel="onCancel"
+        @clear="onclear"
+        @blur="onblur"
+      />
+    </div>
+    <!-- 热门 -->
+    <div class="cm-hot" v-show="show">
+      <div class="cm-hot-name">搜索推荐</div>
+      <van-skeleton
+        :row="1"
+        :loading="historyloading"
+        v-for="(item,index) in 6"
+        :key="index"
+        class="hot-van-skeleton"
+      ></van-skeleton>
+      <div class="cm-lables">
+        <SearchHot :list="hotwordlist" @hot="hotval($event)" />
+      </div>
+    </div>
 
-        <!-- 历史 -->
-        <div
-            class="cm-history"
-            v-show="show"
-        >
-            <div class="cm-history-name">历史搜索</div>
-            <van-skeleton
-                :row="1"
-                :loading="historyloading"
-                v-for="(item,index) in 6"
-                :key="index"
-                class="history-van-skeleton"
-            ></van-skeleton>
-            <SearchHistory
-                :list="historydata"
-                :showclear="showclear"
-                @history="history($event)"
-            />
-            <div
-                class="cm-clears"
-                @click="showclears"
-                v-show="showclear"
-            >
-                <img src="../../assets/img/v-clears@2x.png" />
-                <span class="cm-clears-val">清空搜索记录</span>
-            </div>
-            <div class="cm-clears" v-show="!showclear">
+    <!-- 历史 -->
+    <div class="cm-history" v-show="show">
+      <div class="cm-history-name">历史搜索</div>
+      <van-skeleton
+        :row="1"
+        :loading="historyloading"
+        v-for="(item,index) in 6"
+        :key="index"
+        class="history-van-skeleton"
+      ></van-skeleton>
+      <SearchHistory :list="historydata" :showclear="showclear" @history="history($event)" />
+      <div class="cm-clears" @click="showclears" v-show="showclear">
+        <img src="../../assets/img/v-clears@2x.png" />
+        <span class="cm-clears-val">清空搜索记录</span>
+      </div>
+      <div class="cm-clears" v-show="!showclear">
               <span class="cm-clears-val">暂无搜索历史记录</span>
             </div>
-        </div>
-
-        <!-- 结果 -->
-
-        <div v-show="!show">
-            <div class="cm-result">
-                <div class="cm-van-search">
-                    <van-search
-                        v-model="searchvalue"
-                        show-action
-                        placeholder="输入关键词查询"
-                        @search="onSearch"
-                        @cancel="onCancel"
-                        @clear="onclear"
-                        @blur="onblur"
-                    />
-                </div>
-                <van-sticky :offset-top="0">
-                    <div class="cm-result-header">
-                        <span>资讯</span>
-                    </div>
-                </van-sticky>
-                <van-list
-                    v-model="isUploading"
-                    :finished="upFinished"
-                    @load="onLoadList"
-                    :offset="10"
-                    loading-text="正在刷新"
-                >
-                    <div class="cm-news-list">
-                        <ListItem
-                            v-for="article in articles"
-                            :key="article.id"
-                            :article="article"
-                            class="cm-bottom-noborder"
-                        />
-                    </div>
-                </van-list>
-            </div>
-        </div>
-        <!-- 客服 -->
-        <div
-            class="cm-CustomService"
-            v-show="!show"
-        >
-            <CustomService />
-        </div>
     </div>
+
+    <!-- 结果 -->
+
+    <div v-show="!show">
+      <div class="cm-result">
+        <div class="cm-van-search">
+          <van-search
+            v-model="searchvalue"
+            show-action
+            placeholder="输入关键词查询"
+            @search="onSearch"
+            @cancel="onCancel"
+            @clear="onclear"
+            @blur="onblur"
+          />
+        </div>
+        <van-sticky :offset-top="0">
+          <div class="cm-result-header">
+            <span>资讯</span>
+          </div>
+        </van-sticky>
+        <van-list
+          v-model="isUploading"
+          :finished="upFinished"
+          finished-text="没有更多了"
+          @load="onLoadList"
+          :offset="10"
+          :error.sync="bottomLoadFinish"
+          error-text="请求失败，点击重新加载"
+          loading-text="正在刷新"
+        >
+          <div class="cm-news-list">
+            <ListItem
+              v-for="article in articles"
+              :key="article.id"
+              :article="article"
+              class="cm-bottom-noborder"
+            />
+          </div>
+        </van-list>
+      </div>
+    </div>
+    <!-- 客服 -->
+    <div class="cm-CustomService" v-show="!show">
+      <CustomService />
+    </div>
+  </div>
 </template>
 
 <script>
-    import SearchHistory from '@/components/searchHistory/searchHistory.vue'
-    import SearchHot from '@/components/searchHot/searchHot.vue'
-    import CustomService from '@/components/customService/customService.vue'
-    import ListItem from '@/components/ListItem/ListItem.vue'
-    export default {
-      components: {
-        ListItem,
-        SearchHot,
-        SearchHistory,
-        CustomService
-      },
-      data() {
-        return {
-          isUploading: false, //是否处于上拉加载状态
-          upFinished: false, //数据加载是否完毕
-          searchvalue: '',
-          show: true,
-          loading: false,
-          historyloading: true,
-          showclear: true,
-          // 数据
-          historydata: [],
-          articles: [],
-          hotwordlist: [],
-          result: []
-        }
-      },
-      created() {
-        this.inita()
-      },
-      methods: {
-        // 上拉刷新
-        onLoadList() {
-          const _this = this
-          setTimeout(() => {
-            this.$axios
-              .get('/getList')
-              .then(response => {
-                _this.articles = _this.articles.concat(response.data.data)
-                _this.isUploading = false
-              })
-              .catch(error => console.log(error))
-          }, 1000)
-        },
-        // 清空历史
-        showclears() {
-          localStorage.setItem('searchHistory', '')
-          this.showclear = false
-        },
-        //输入框失去焦点时触发
-        onblur() {
-          if (this.searchvalue == '') {
-            this.show = true
-          } else {
-            this.show = false
-          }
-        },
-        // 点击清除按钮后触发
-        onclear() {
-          this.show = true
-        },
-        // 初始化
-        inita() {
-          this.$axios
-            .get('/getSearchHotKeyWordList')
-            .then(response => {
-              this.hotwordlist = response.data.data
-            })
-            .catch(error => console.log(error))
+import SearchHistory from '@/components/searchHistory/searchHistory.vue'
+import SearchHot from '@/components/searchHot/searchHot.vue'
+import CustomService from '@/components/customService/customService.vue'
+import ListItem from '@/components/ListItem/ListItem.vue'
+export default {
+  components: {
+    ListItem,
+    SearchHot,
+    SearchHistory,
+    CustomService
+  },
+  data() {
+    return {
+      bottomLoadFinish: false,//触底加载是否出错
+      isUploading: false, //是否处于上拉加载状态
+      upFinished: false, //数据加载是否完毕
+      searchvalue: '',
+      show: true,
+      loading: false,
+      historyloading: true,
+      showclear: true,
+      // 数据
+      historydata: [],
+      articles: [],
+      hotwordlist: [],
+      result: []
+    }
+  },
+  created() {
+    this.inita()
+  },
+  methods: {
+    // 触底加载
+    onLoadList() {
+      const _this = this
+      setTimeout(() => {
+        _this.$axios
+          .get('/getList')
+          .then(response => {
+            _this.articles = _this.articles.concat(response.data.data)
+            _this.isUploading = false
+            // 判断数据是否全部加载结束
+            if( _this.articles.length >= 10) {
+              _this.upFinished = true;
+            }
+          })
+          .catch(error => {
+            console.log(error)
+            _this.bottomLoadFinish = true;
+          })
+      }, 1000)
+    },
+    // 清空历史
+    showclears() {
+      localStorage.setItem('searchHistory', '')
+      this.showclear = false
+    },
+    //输入框失去焦点时触发
+    onblur() {
+      if (this.searchvalue == '') {
+        this.show = true
+      } else {
+        this.show = false
+      }
+    },
+    // 点击清除按钮后触发
+    onclear() {
+      this.show = true
+    },
+    // 初始化
+    inita() {
+      this.$axios
+        .get('/getSearchHotKeyWordList')
+        .then(response => {
+          this.hotwordlist = response.data.data
+        })
+        .catch(error => console.log(error))
 
-          this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []  
-          console.log(this.historydata) 
-          this.historyloading = false
+      this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []  
+      console.log(this.historydata) 
+      this.historyloading = false
 
-          this.$axios
-            .get('/getList')
-            .then(response => {
-              this.articles = response.data.data
-            })
-            .catch(error => console.log(error))
-        },
-        // 点击热词搜索
-        hotval(item) {
-          this.searchvalue = item.key
-          this.updateSearchHistory(item.key)
-          this.showclear = true
-          this.show = false
-        },
-        // 点击历史搜索
-        history(item) {
-          this.searchvalue = item
-          this.updateSearchHistory(item)
-          this.showclear = true
-          this.show = false
-        },
-        onSearch(val) {
-          if (val == '') {
-            this.show = true
-          } else {
-            this.updateSearchHistory(val)
-            this.showclear = true
-            this.show = false
-          }
-        },
-        // 点击取消按钮后触发
-        onCancel() {
-          setTimeout(() => {
-            this.show = true
-          }, 100)
-          this.$router.go(-1)
-        },
-
-        // 更新搜索历史记录
+      this.$axios
+        .get('/getList')
+        .then(response => {
+          this.articles = response.data.data
+        })
+        .catch(error => console.log(error))
+    },
+    // 点击热词搜索
+    hotval(item) {
+      this.searchvalue = item.key
+      this.updateSearchHistory(item.key)
+      this.showclear = true
+      this.show = false
+    },
+    // 点击历史搜索
+    history(item) {
+      this.searchvalue = item
+      this.updateSearchHistory(item)
+      this.showclear = true
+      this.show = false
+    },
+    onSearch(val) {
+      if (val == '') {
+        this.show = true
+      } else {
+        this.updateSearchHistory(val)
+        this.showclear = true
+        this.show = false
+      }
+    },
+    // 点击取消按钮后触发
+    onCancel() {
+      setTimeout(() => {
+        this.show = true
+      }, 100)
+      this.$router.go(-1)
+    },
+    
+    // 更新搜索历史记录
         updateSearchHistory(val){
           this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []
           this.historydata.unshift(val)
@@ -236,8 +224,8 @@
           console.log(this.historydata)
           localStorage.setItem('searchHistory', JSON.stringify(this.historydata))
         }
-      }
-    }
+  }
+}
 </script>
 <style lang="scss" type="text/css" scoped>
 @import '../../assets/css/global.scss';
