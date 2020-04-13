@@ -99,6 +99,8 @@ import SearchHistory from '@/components/searchHistory/searchHistory.vue'
 import SearchHot from '@/components/searchHot/searchHot.vue'
 import CustomService from '@/components/customService/customService.vue'
 import ListItem from '@/components/ListItem/ListItem.vue'
+import {searchRequest} from '@/api/api.js'
+
 export default {
   components: {
     ListItem,
@@ -202,6 +204,11 @@ export default {
       if (val == '') {
         this.show = true
       } else {
+        console.log("Searching for : ", val)
+        var d = '{  "abc": "11"} '
+        searchRequest(d).then((res)=>{
+          console.log(res)
+        })
         this.updateSearchHistory(val)
         this.showclear = true
         this.show = false
@@ -214,7 +221,7 @@ export default {
       }, 100)
       this.$router.go(-1)
     },
-    
+
     // 更新搜索历史记录
         updateSearchHistory(val){
           this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []

@@ -27,3 +27,11 @@ export function getNewsDetail(){
     method: 'get'
   })
 }
+
+export function searchRequest(data){
+  return request({
+    url: '/searchResult',
+    method: 'post',
+    data
+  })
+}
