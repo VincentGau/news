@@ -2,6 +2,8 @@ const path = require('path')
 const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin')
 
 module.exports = {
+  publicPath: '/ins',
+  outputDir: 'dist/ins/',
   lintOnSave: false, // 关闭eslint规则
   devServer: {
     port: 9000,

@@ -42,12 +42,9 @@ export default {
     this.getDataList()
   },
   methods: {
-    toDetails(item) {
+    toDetails(item) {      
       this.$router.push({
-        path: '/shortMessageDetails',
-        query: {
-          article: item
-        }
+        path: '/shortMessageDetails/' + item.docId,
       })
     },
     // 获取数据

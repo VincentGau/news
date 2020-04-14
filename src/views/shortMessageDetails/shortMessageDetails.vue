@@ -94,7 +94,7 @@
         }
       },
       created() {
-        this.articleId = this.$route.query.articleId
+        this.articleId = this.$route.params.articleId
       },
       mounted() {
         this.getdata()

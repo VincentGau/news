@@ -1,6 +1,6 @@
 <template>
     <div class="cm-news-item">
-        <router-link :to="{ path: '/articleDetails', query: { articleId: article.docId } }">
+        <router-link :to="{ path: '/articleDetails/' + article.docId}">
             <div class="cm-news-abstract">
                 <div class="cm-news-tit">
                     <span>{{ article.title }}</span>

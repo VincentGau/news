@@ -11,7 +11,7 @@
                 v-for="(item, index) in Swipers"
                 :key="index"
             >
-                <router-link :to="{ path: '/articleDetails', query: { articleId: item.docId } }">
+                <router-link :to="{ path: '/articleDetails/' + item.docId}">
 
                     <img
                         :src="item.coverUrl"

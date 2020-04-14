@@ -93,7 +93,7 @@
         }
       },
       created() {
-        this.articleId = this.$route.query.articleId
+        this.articleId = this.$route.params.articleId
         console.log('文章id', this.articleId)
       },
       mounted() {

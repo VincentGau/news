@@ -27,7 +27,7 @@ const routes = [
       import(/* webpackChunkName: "home" */ '../views/home/home.vue')
   },
   {
-    path: '/articleDetails',
+    path: '/articleDetails/:articleId',
     name: 'articleDetails',
 
     component: () =>
@@ -36,7 +36,7 @@ const routes = [
       )
   },
   {
-    path: '/shareArticleDetails',
+    path: '/shareArticleDetails/:articleId',
     name: 'shareArticleDetails',
     component: () =>
       import(
@@ -51,7 +51,7 @@ const routes = [
   },
 
   {
-    path: '/shortMessageDetails',
+    path: '/shortMessageDetails/:articleId',
     name: 'shortMessageDetails',
     component: () =>
       import(
