@@ -259,7 +259,7 @@
     .myswiper {
       height: 100%;
       .slide {
-        height: 93%;
+        height: calc(100% - 0.9rem);
         overflow-y: scroll;
       }
     }

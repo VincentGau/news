@@ -11,21 +11,6 @@
         @blur="onblur"
       />
     </div>
-    <!-- 热门 -->
-    <div class="cm-hot" v-show="show">
-      <div class="cm-hot-name">搜索推荐</div>
-      <van-skeleton
-        :row="1"
-        :loading="historyloading"
-        v-for="(item,index) in 6"
-        :key="index"
-        class="hot-van-skeleton"
-      ></van-skeleton>
-      <div class="cm-lables">
-        <SearchHot :list="hotwordlist" @hot="hotval($event)" />
-      </div>
-    </div>
-
     <!-- 历史 -->
     <div class="cm-history" v-show="show">
       <div class="cm-history-name">历史搜索</div>
@@ -47,7 +32,6 @@
     </div>
 
     <!-- 结果 -->
-
     <div v-show="!show">
       <div class="cm-result">
         <div class="cm-van-search">
@@ -96,21 +80,18 @@
 
 <script>
 import SearchHistory from '@/components/searchHistory/searchHistory.vue'
-import SearchHot from '@/components/searchHot/searchHot.vue'
 import CustomService from '@/components/customService/customService.vue'
 import ListItem from '@/components/ListItem/ListItem.vue'
 import {searchRequest} from '@/api/api.js'
-
 export default {
   components: {
     ListItem,
-    SearchHot,
     SearchHistory,
     CustomService
   },
   data() {
     return {
-      bottomLoadFinish: false,//触底加载是否出错
+      bottomLoadFinish: false, //触底加载是否出错
       isUploading: false, //是否处于上拉加载状态
       upFinished: false, //数据加载是否完毕
       searchvalue: '',
@@ -153,6 +134,7 @@ export default {
     showclears() {
       localStorage.setItem('searchHistory', '')
       this.showclear = false
+      // this.historydata.length = 0
     },
     //输入框失去焦点时触发
     onblur() {
@@ -174,9 +156,8 @@ export default {
           this.hotwordlist = response.data.data
         })
         .catch(error => console.log(error))
-
+      
       this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []  
-      console.log(this.historydata) 
       this.historyloading = false
 
       this.$axios
@@ -185,13 +166,6 @@ export default {
           this.articles = response.data.data
         })
         .catch(error => console.log(error))
-    },
-    // 点击热词搜索
-    hotval(item) {
-      this.searchvalue = item.key
-      this.updateSearchHistory(item.key)
-      this.showclear = true
-      this.show = false
     },
     // 点击历史搜索
     history(item) {
@@ -218,19 +192,20 @@ export default {
     onCancel() {
       setTimeout(() => {
         this.show = true
+        this.showclear = true
       }, 100)
       this.$router.go(-1)
     },
 
     // 更新搜索历史记录
-        updateSearchHistory(val){
-          this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []
-          this.historydata.unshift(val)
-          let hSet = new Set(this.historydata)
-          this.historydata = [...hSet]
-          console.log(this.historydata)
-          localStorage.setItem('searchHistory', JSON.stringify(this.historydata))
-        }
+    updateSearchHistory(val){
+      this.historydata = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : []
+      this.historydata.unshift(val)
+      let hSet = new Set(this.historydata)
+      this.historydata = [...hSet]
+      console.log(this.historydata)
+      localStorage.setItem('searchHistory', JSON.stringify(this.historydata))
+    }
   }
 }
 </script>
@@ -294,12 +269,11 @@ export default {
     height: 1.6rem;
   }
 }
-
 /* 历史 */
 .cm-history {
   width: 100%;
   position: fixed;
-  top: 3.55rem;
+  top: 0.55rem;
   bottom: 0;
   background: $contentBackgroundColor;
   margin-top: 0.4rem;
@@ -335,4 +309,8 @@ export default {
     }
   }
 }
+.cm-CustomService{
+  
+    margin-top: .66rem; 
+} 
 </style>
