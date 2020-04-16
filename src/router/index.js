@@ -22,14 +22,18 @@ const routes = [
   {
     path: '/',
     name: 'home',
-
+    meta: {
+      keepAlive: true
+    },
     component: () =>
       import(/* webpackChunkName: "home" */ '../views/home/home.vue')
   },
   {
     path: '/articleDetails/:articleId',
     name: 'articleDetails',
-
+    meta: {
+      keepAlive: false
+    },
     component: () =>
       import(
         /* webpackChunkName: "articleDetails" */ '../views/articleDetails/articleDetails.vue'
@@ -38,6 +42,9 @@ const routes = [
   {
     path: '/shareArticleDetails/:articleId',
     name: 'shareArticleDetails',
+    meta: {
+      keepAlive: false
+    },
     component: () =>
       import(
         /* webpackChunkName: "shareArticleDetails" */ '../views/shareArticleDetails/shareArticleDetails.vue'
@@ -46,6 +53,9 @@ const routes = [
   {
     path: '/search',
     name: 'search',
+    meta: {
+      keepAlive: false
+    },
     component: () =>
       import(/* webpackChunkName: "search" */ '../views/search/search.vue')
   },
@@ -53,6 +63,9 @@ const routes = [
   {
     path: '/shortMessageDetails/:articleId',
     name: 'shortMessageDetails',
+    meta: {
+      keepAlive: false
+    },
     component: () =>
       import(
         /* webpackChunkName: "shortMessageDetails" */ '../views/shortMessageDetails/shortMessageDetails.vue'
