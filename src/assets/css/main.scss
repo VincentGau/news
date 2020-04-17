@@ -116,7 +116,24 @@
 .cm-bottom-noborder {
     border: none;
 }
-
+.cm-shareArticle-content{
+    padding: 0.2rem 0;
+    img {
+      width: 6.86rem;
+      height: 3.44rem;
+    }
+    p {
+      padding: 0.2rem 0;
+      @include fontStyle(
+        $hanziFontFamily,
+        $textdarkColor,
+        0.3rem,
+        0.5rem,
+        0rem,
+        $textAlignJustify
+      );
+    }
+  }
 
 // articleDetails end
 

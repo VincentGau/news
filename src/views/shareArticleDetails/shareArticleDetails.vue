@@ -1,21 +1,7 @@
 <template>
     <div>
-        <van-nav-bar
-            left-text=""
-            left-arrow
-            @click-left="onClickLeft"
-            @click-right="onClickRight"
-            :fixed="true"
-        >
-            <template #left>
-                <van-icon name="cross" />
-            </template>
-            <template #right>
-                <van-icon name="ellipsis" />
-            </template>
-        </van-nav-bar>
         <!-- 文章 -->
-        <div class="cm-article-page">
+        <div class="cm-shareArticle-page">
             <van-skeleton
                 title
                 avatar
@@ -46,12 +32,11 @@
             </div>
 
             <div
-                class="cm-article-content"
+                class="cm-shareArticle-content"
                 v-html="NewsDetail.content"
             ></div>
             <div class="cm-article-read">
                 <span><i>{{ NewsDetail.readNum }}</i>阅读</span>
-
             </div>
             <!-- 点赞按钮 -->
             <praiseButton
@@ -93,7 +78,7 @@
         }
       },
       created() {
-        this.articleId = this.$route.params.articleId
+        this.articleId = this.$route.query.articleId
         console.log('文章id', this.articleId)
       },
       mounted() {
@@ -132,71 +117,89 @@
 
 <style lang="scss" type="text/css" scoped>
 @import '../../assets/css/global.scss';
-.van-nav-bar {
-  height: 0.92rem;
-}
-.van-nav-bar__right .van-icon,
-.van-nav-bar__left .van-icon {
-  color: #181818;
-  font-size: 0.4rem;
-}
-.van-hairline--bottom::after {
-  border: none;
-}
-.cm-shareArticle-authorInfo {
-  padding: 0.3rem 0;
-  span {
-    display: inline-block;
-  }
-  .cm-article-source {
-    width: 70%;
+// .van-nav-bar {
+//   height: 0.92rem;
+// }
+// .van-nav-bar__right .van-icon,
+// .van-nav-bar__left .van-icon {
+//   color: #181818;
+//   font-size: 0.4rem;
+// }
+// .van-hairline--bottom::after {
+//   border: none;
+// }
+.cm-shareArticle-page {
+  padding: 0.4rem 0.32rem 0.36rem 0.32rem;
+  height: 100%;
+  background-color: $contentBackgroundColor;
+  .cm-article-tit {
     @include fontStyle(
       $hanziFontFamily,
-      $textdarkColor,
-      0.26rem,
-      0.26rem,
-      0,
-      $textAlignLeft
+      $textHighLightColor,
+      0.4rem,
+      0.54rem,
+      0rem,
+      $textAlignJustify
     );
   }
 
-  .cm-article-date {
-    width: 30%;
-    margin-right: 0rem;
-    @include fontStyle(
-      $numberFontFamily,
-      $textLightColor,
-      0.26rem,
-      0.26rem,
-      0,
-      $textAlignRight
-    );
-  }
-}
-.cm-article-read {
-  text-align: $textAlignLeft;
+  
+  .cm-shareArticle-authorInfo {
+    padding: 0.3rem 0;
+    span {
+      display: inline-block;
+    }
+    .cm-article-source {
+      width: 70%;
+      @include fontStyle(
+        $hanziFontFamily,
+        $textdarkColor,
+        0.26rem,
+        0.26rem,
+        0,
+        $textAlignLeft
+      );
+    }
 
-  span {
-    @include fontStyle(
-      $hanziFontFamily,
-      $textArticleReadColor,
-      0.28rem,
-      0.28rem,
-      0,
-      $textAlignLeft
-    );
-    i {
+    .cm-article-date {
+      width: 30%;
+      margin-right: 0rem;
       @include fontStyle(
         $numberFontFamily,
         $textLightColor,
+        0.26rem,
+        0.26rem,
+        0,
+        $textAlignRight
+      );
+    }
+  }
+  .cm-article-read {
+    text-align: $textAlignLeft;
+
+    span {
+      @include fontStyle(
+        $hanziFontFamily,
+        $textArticleReadColor,
         0.28rem,
         0.28rem,
         0,
         $textAlignLeft
       );
+      i {
+        @include fontStyle(
+          $numberFontFamily,
+          $textLightColor,
+          0.28rem,
+          0.28rem,
+          0,
+          $textAlignLeft
+        );
+      }
     }
   }
 }
+
 .cm-fond-more {
   height: 0.8rem;
   position: relative;
